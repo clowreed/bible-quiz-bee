@@ -1,2 +1,3 @@
-# bible-quiz-bee
+# Bible Quiz Bee
+
 Bible Quiz Game
