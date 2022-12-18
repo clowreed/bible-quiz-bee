@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,33 +6,16 @@ import Modal from "react-bootstrap/Modal";
 import "../css/common.css";
 import "../css/game.css";
 
-function Welcome() {
-  const [showGuestInput, setShowGuestInput] = useState("");
-  const [username, setUserName] = useState("");
-  const [isPlayingAsGuest, setIsPlayingAsGuest] = useState(false);
-
-  const handleGuestLogin = () => {
-    setShowGuestInput(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowGuestInput(false);
-  };
-
-  const handleTextInput = (event) => {
-    const val = event.target.value;
-    setUserName(val);
-  };
-
-  const handleSaveGuest = () => {
-    if (username === "") {
-      alert("Please enter a valid username");
-      return;
-    }
-    setIsPlayingAsGuest(true);
-    handleCloseModal();
-  };
-
+function Welcome({
+  showGuestInput,
+  username,
+  isPlayingAsGuest,
+  handleGuestLogin,
+  handleCloseModal,
+  handleTextInput,
+  handleSaveGuest,
+  startGame,
+}) {
   const renderModal = () => {
     return (
       <Modal
@@ -115,8 +97,8 @@ function Welcome() {
 
   const renderStart = () => {
     return (
-      <div className="start-game-container d-grid gap-2">
-        <Button variant="primary" size="lg">
+      <div className="d-grid gap-2">
+        <Button variant="primary" size="lg" onClick={startGame}>
           Start Game
         </Button>
       </div>
