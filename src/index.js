@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './assets/fonts/quicksand/Quicksand-Bold.ttf';
+import './assets/fonts/quicksand/Quicksand-Light.ttf';
+import './assets/fonts/quicksand/Quicksand-Medium.ttf';
+import './assets/fonts/quicksand/Quicksand-Regular.ttf';
+import './assets/fonts/quicksand/Quicksand-SemiBold.ttf';
+import './css/fonts.css';
 import './index.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

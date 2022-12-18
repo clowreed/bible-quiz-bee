@@ -1,3 +1,40 @@
-.show-border {
-  border: 1px solid red;
+@media only screen and (min-width: 320px) {
+  .show-border {
+    border: 1px solid red;
+  }
+
+  .welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .full-height {
+    height: 100vh;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1.main-title {
+    font-family: "Quicksand-Bold";
+    font-size: xx-large;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 1200px) {
+  h1.main-title {
+    font-size: 100px;
+    font-family: "Quicksand-Bold";
+  }
+}
+
+@media only screen and (min-width: 1400px) {
 }

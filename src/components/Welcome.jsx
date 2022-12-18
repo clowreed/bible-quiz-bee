@@ -6,13 +6,41 @@ import "../css/common.css";
 
 function Welcome() {
   return (
-    <Container className="show-border">
-      <Row>
-        <Col>
-          <h1>Bible Quiz Bee App!</h1>
-          <Button variant="primary">Start</Button>
-        </Col>
-      </Row>
+    <Container className="full-height">
+      <div className="welcome">
+        <div className="main-container">
+          <div className="text-center">
+            <h1 className="main-title">Bible Adventures</h1>
+          </div>
+          <div>
+            <Container fluid>
+              <Row>
+                <Col
+                  className="d-flex justify-content-center mb-2"
+                  md={6}
+                  xs={12}
+                >
+                  <Button variant="info">Connect Wallet</Button>
+                </Col>
+                <Col
+                  className="d-flex justify-content-center mb-2"
+                  md={6}
+                  xs={12}
+                >
+                  <Button
+                    variant="secondary justify-content-center align-content-center"
+                    onClick={() => {
+                      alert("hello");
+                    }}
+                  >
+                    Login as Guest
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
+      </div>
     </Container>
   );
 }
