@@ -23,6 +23,8 @@
 
   #game .game-screen {
     width: 95%;
+    display: flex;
+    justify-content: center;
   }
 
   #game .instructions-text {
@@ -33,6 +35,15 @@
   #game .next-button-container {
     display: flex;
     justify-content: right;
+  }
+
+  #game .question-container {
+    width: 100%;
+  }
+
+  #game .question-text {
+    font-family: "Quicksand-Bold";
+    font-size: large;
   }
 }
 
@@ -53,11 +64,15 @@
     align-items: center;
   }
 
-  #game .start-game-container {
+  #game .question-text {
+    font-size: xx-large;
   }
 }
 
 @media only screen and (min-width: 1200px) {
+  #game .question-container {
+    width: 50%;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
