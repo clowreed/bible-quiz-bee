@@ -43,6 +43,34 @@ class QuizModel {
     this.difficulty = difficulty;
     this.points = points;
   }
+
+  getId() {
+    return this.id;
+  }
+
+  getQuestion() {
+    return this.question;
+  }
+
+  getAnswer() {
+    return this.answer;
+  }
+
+  getOptions() {
+    return this.options;
+  }
+
+  getCategory() {
+    return this.category;
+  }
+
+  getDifficulty() {
+    return this.difficulty;
+  }
+
+  getPoints() {
+    return this.points;
+  }
 }
 
 export default QuizModel;

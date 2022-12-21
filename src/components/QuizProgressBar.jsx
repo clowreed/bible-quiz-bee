@@ -6,7 +6,8 @@ function QuizProgressBar({
   variant = "success",
   label = "0 of 10",
 }) {
-  return <ProgressBar now={now} max={max} variant={variant} label={label} />;
+  const cyber = `${now} of ${max}`;
+  return <ProgressBar now={now} max={max} variant={variant} label={cyber} />;
 }
 
 export default QuizProgressBar;
