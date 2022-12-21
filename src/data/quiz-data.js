@@ -77,7 +77,7 @@ export const QUESTIONS = [
     id: 9,
     question: "Who is referred to as the father of many nations?",
     answer: "Abraham",
-    options: ["Jeremiah", "Jonah", "Nathaniel", "Jacob"],
+    options: ["Jeremiah", "Abraham", "Nathaniel", "Jacob"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.easy.difficulty,
     points: DIFFICULTY_LEVEL.easy.points

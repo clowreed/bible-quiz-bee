@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import QuizProgressBar from "./QuizProgressBar";
 import AnswerCard from "./AnswerCard";
 import { IoHeart } from "react-icons/io5";
@@ -54,6 +55,9 @@ function Questions() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
   const [itemCounter, setItemCounter] = useState(0);
+  const [points, setPoints] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const questions = getQuestionsData("easy");
@@ -65,74 +69,105 @@ function Questions() {
   };
 
   const handleNextQuestion = () => {
+    handleClose();
+    setIsCorrect(false);
+    setSelectedAnswer(null);
     if (itemCounter < EASY_LEVEL_ITEMS - 1) {
       setItemCounter(itemCounter + 1);
     }
   };
 
+  const handleCheckAnswer = () => {
+    if (selectedAnswer === quizData[itemCounter].getAnswer()) {
+      setIsCorrect(true);
+      setPoints(points + 1);
+    } else {
+      setIsCorrect(false);
+      setHeartCounter(heartCounter - 1);
+    }
+    handleShow();
+  };
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  const renderOptions = () => {
+    return quizData[itemCounter].getOptions().map((option, index) => {
+      return (
+        <Col key={option} xs={6} className="d-flex justify-content-center py-2">
+          <AnswerCard
+            answer={option}
+            index={index}
+            handleClick={selectAnswer}
+          />
+        </Col>
+      );
+    });
+  };
+
+  const renderModal = () => {
+    const msg = isCorrect ? "Great!" : "Oops. That is incorrect.";
+    return (
+      <Modal
+        show={showModal}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        backdrop="static"
+      >
+        <Modal.Body>{msg}</Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant={isCorrect ? "success" : "danger"}
+            onClick={handleNextQuestion}
+          >
+            Continue
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
+
   return (
     <div className="question-container">
       {quizData && quizData.length > 0 && (
-        <Container fluid>
-          <Row className="p-0">
-            <Col xs={8} md={10} className="pt-1">
-              <QuizProgressBar now={itemCounter + 1} />
-            </Col>
-            <Col
-              xs={4}
-              md={2}
-              className="px-0 d-flex justify-content-center align-content-center"
-            >
-              {renderHearts(heartCounter)}
-            </Col>
-          </Row>
-          <Row>
-            <Col className="text-center py-2">
-              <div className="question-text">
-                {quizData[itemCounter].question}
-              </div>
-            </Col>
-          </Row>
-          <Row className="py-2">
-            <Col xs={6} className="d-flex justify-content-center py-2">
-              <AnswerCard
-                answer={quizData[itemCounter].options[0]}
-                index={0}
-                handleClick={selectAnswer}
-              />
-            </Col>
-            <Col xs={6} className="d-flex justify-content-center py-2">
-              <AnswerCard
-                answer={quizData[itemCounter].options[1]}
-                index={1}
-                handleClick={selectAnswer}
-              />
-            </Col>
-            <Col xs={6} className="d-flex justify-content-center py-2">
-              <AnswerCard
-                answer={quizData[itemCounter].options[2]}
-                index={2}
-                handleClick={selectAnswer}
-              />
-            </Col>
-            <Col xs={6} className="d-flex justify-content-center py-2">
-              <AnswerCard
-                answer={quizData[itemCounter].options[3]}
-                index={3}
-                handleClick={selectAnswer}
-              />
-            </Col>
-          </Row>
-          <Row className="mt-2 mt-md-5">
-            <Col className="px-0">
-              <div className="check-answer-button-container d-grid gap-2">
-                <Button variant="info" size="lg" onClick={handleNextQuestion}>
-                  Check Answer
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+        <>
+          <Container fluid>
+            <Row className="p-0">
+              <Col xs={6} md={8} className="pt-1">
+                <QuizProgressBar now={itemCounter + 1} />
+              </Col>
+              <Col
+                xs={4}
+                md={2}
+                className="px-0 d-flex justify-content-center align-content-center"
+              >
+                {renderHearts(heartCounter)}
+              </Col>
+              <Col xs={2} md={2} className="pt-1">
+                {points} pts.
+              </Col>
+            </Row>
+            <Row>
+              <Col className="text-center py-2">
+                <div className="question-text">
+                  {quizData[itemCounter].getQuestion()}
+                </div>
+              </Col>
+            </Row>
+            <Row className="py-2">{renderOptions()}</Row>
+            <Row className="mt-2 mt-md-5">
+              <Col className="px-0">
+                <div className="check-answer-button-container d-grid gap-2">
+                  <Button variant="info" size="lg" onClick={handleCheckAnswer}>
+                    Check Answer
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+          {renderModal()}
+        </>
       )}
     </div>
   );
