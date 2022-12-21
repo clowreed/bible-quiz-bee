@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,6 +7,9 @@ import QuizProgressBar from "./QuizProgressBar";
 import AnswerCard from "./AnswerCard";
 import { IoHeart } from "react-icons/io5";
 import CustomIcons from "./CustomIcons";
+import { QUESTIONS } from "../data/quiz-data";
+
+const QUESTION_INDEX = 2;
 
 const renderHearts = (heartCounter) => {
   const hearts = [];
@@ -33,6 +36,10 @@ function Questions() {
   const itemsAnswered = 8;
   const progressLabel = `${itemsAnswered} of 10`;
 
+  useEffect(() => {
+    console.log("Questions Data ===>", QUESTIONS);
+  }, []);
+
   const selectAnswer = (answer) => {
     setSelectedAnswer(answer);
   };
@@ -55,24 +62,35 @@ function Questions() {
         <Row>
           <Col className="text-center py-2">
             <div className="question-text">
-              Question No. 1: Who was the oldest living person recorded in the
-              Bible?
+              {QUESTIONS[QUESTION_INDEX].question}
             </div>
           </Col>
         </Row>
         <Row className="py-2">
           <Col xs={6} className="d-flex justify-content-center py-2">
-            <AnswerCard answer="Moses" index={0} handleClick={selectAnswer} />
-          </Col>
-          <Col xs={6} className="d-flex justify-content-center py-2">
-            <AnswerCard answer="Adam" index={1} handleClick={selectAnswer} />
-          </Col>
-          <Col xs={6} className="d-flex justify-content-center py-2">
-            <AnswerCard answer="David" index={2} handleClick={selectAnswer} />
+            <AnswerCard
+              answer={QUESTIONS[QUESTION_INDEX].options[0]}
+              index={0}
+              handleClick={selectAnswer}
+            />
           </Col>
           <Col xs={6} className="d-flex justify-content-center py-2">
             <AnswerCard
-              answer="Methuselah"
+              answer={QUESTIONS[QUESTION_INDEX].options[1]}
+              index={1}
+              handleClick={selectAnswer}
+            />
+          </Col>
+          <Col xs={6} className="d-flex justify-content-center py-2">
+            <AnswerCard
+              answer={QUESTIONS[QUESTION_INDEX].options[2]}
+              index={2}
+              handleClick={selectAnswer}
+            />
+          </Col>
+          <Col xs={6} className="d-flex justify-content-center py-2">
+            <AnswerCard
+              answer={QUESTIONS[QUESTION_INDEX].options[3]}
               index={3}
               handleClick={selectAnswer}
             />
