@@ -33,6 +33,10 @@ function Home() {
     setIsGameStarted(true);
   };
 
+  const restartGame = () => {
+    setIsGameStarted(false);
+  };
+
   const renderWelcomeScreen = () => {
     return (
       <Welcome
@@ -49,7 +53,7 @@ function Home() {
   };
 
   const renderGameScreen = () => {
-    return <Game username={username} />;
+    return <Game username={username} restartGame={restartGame} />;
   };
 
   const screen = isGameStarted ? renderGameScreen() : renderWelcomeScreen();

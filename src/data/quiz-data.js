@@ -111,7 +111,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 13,
-    question: "Where was town where the baby Jesus born?",
+    question: "Where was the town where the baby Jesus born?",
     answer: "Bethlehem",
     options: ["Nazareth", "Gilead", "Bethlehem", "Bethsaida"],
     category: CATEGORIES.general,

@@ -9,7 +9,6 @@ import AnswerCard from "./AnswerCard";
 import { IoHeart } from "react-icons/io5";
 import CustomIcons from "./CustomIcons";
 import { QUESTIONS } from "../data/quiz-data";
-import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 
 const EASY_LEVEL_ITEMS = 10;
 const MEDIUM_LEVEL_ITEMS = 15;
@@ -35,34 +34,33 @@ const renderHeart = (index) => (
 );
 
 const getQuestionsData = (difficulty = "easy", limit = EASY_LEVEL_ITEMS) => {
-  let count = 0;
   const questions = QUESTIONS.filter((question) => {
-    if (count < limit) {
-      count++;
-      return question.difficulty === difficulty;
-    }
-    return false;
+    return question.difficulty === difficulty;
   });
-  return randomizeQuestions(questions);
+  return randomizeQuestions(questions).slice(0, limit);
 };
 
 const randomizeQuestions = (questions) => {
   return questions.sort(() => Math.random() - 0.5);
 };
 
-function Questions() {
-  const [heartCounter, setHeartCounter] = useState(5);
+function Questions({
+  difficulty = "easy",
+  points,
+  setPoints,
+  heartCounter,
+  setHeartCounter,
+}) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
   const [itemCounter, setItemCounter] = useState(0);
-  const [points, setPoints] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const questions = getQuestionsData("easy");
+    const questions = getQuestionsData(difficulty);
     setQuizData(questions);
-  }, []);
+  }, [difficulty]);
 
   const selectAnswer = (answer) => {
     setSelectedAnswer(answer);
@@ -72,27 +70,40 @@ function Questions() {
     handleClose();
     setIsCorrect(false);
     setSelectedAnswer(null);
-    if (itemCounter < EASY_LEVEL_ITEMS - 1) {
+    //if (itemCounter <= EASY_LEVEL_ITEMS - 1) {
+    if (!isLevelFinished()) {
       setItemCounter(itemCounter + 1);
     }
   };
 
   const handleCheckAnswer = () => {
-    if (selectedAnswer === quizData[itemCounter].getAnswer()) {
-      setIsCorrect(true);
-      setPoints(points + 1);
+    if (isLevelFinished()) {
+      alert("Level finished!");
     } else {
-      setIsCorrect(false);
-      setHeartCounter(heartCounter - 1);
+      if (selectedAnswer === quizData[getItemIndex()].getAnswer()) {
+        setIsCorrect(true);
+        setPoints(points + 1);
+      } else {
+        setIsCorrect(false);
+        setHeartCounter(heartCounter - 1);
+      }
+      handleShow();
     }
-    handleShow();
+  };
+
+  const isLevelFinished = () => {
+    return itemCounter + 1 > EASY_LEVEL_ITEMS;
+  };
+
+  const getItemIndex = () => {
+    return !isLevelFinished() ? itemCounter : itemCounter - 1;
   };
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
   const renderOptions = () => {
-    return quizData[itemCounter].getOptions().map((option, index) => {
+    return quizData[getItemIndex()].getOptions().map((option, index) => {
       return (
         <Col key={option} xs={6} className="d-flex justify-content-center py-2">
           <AnswerCard
@@ -136,7 +147,7 @@ function Questions() {
           <Container fluid>
             <Row className="p-0">
               <Col xs={6} md={8} className="pt-1">
-                <QuizProgressBar now={itemCounter + 1} />
+                <QuizProgressBar now={getItemIndex() + 1} />
               </Col>
               <Col
                 xs={4}
@@ -152,7 +163,7 @@ function Questions() {
             <Row>
               <Col className="text-center py-2">
                 <div className="question-text">
-                  {quizData[itemCounter].getQuestion()}
+                  {quizData[getItemIndex()].getQuestion()}
                 </div>
               </Col>
             </Row>

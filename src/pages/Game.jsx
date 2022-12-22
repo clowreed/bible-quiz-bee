@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Questions from "../components/Questions";
+import GameOver from "../components/GameOver";
+import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 
 const STEP_1_TEXT = `This app will test your knowledge about the Bible.
   You will be given a set of questions in three levels of difficulty:
@@ -12,9 +14,11 @@ const STEP_2_TEXT = `You will start with 5 hearts, and if you consume all your h
 
 const STEP_3_TEXT = `Once you are ready, click the Start button to begin. Good luck!`;
 
-function Game({ username }) {
+function Game({ username, restartGame }) {
   const [step, setNextStep] = useState(1);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [heartCounter, setHeartCounter] = useState(5);
   const [instructionText, setInstructionText] = useState(
     `Hello ${username}! ${STEP_1_TEXT}`
   );
@@ -67,15 +71,41 @@ function Game({ username }) {
     );
   };
 
-  const renderQuestions = () => {
-    return <Questions />;
+  const handleRestartGame = () => {
+    setHeartCounter(5);
+    setPoints(0);
+    restartGame();
   };
+
+  const renderQuestions = () => {
+    return (
+      <Questions
+        difficulty={DIFFICULTY_LEVEL.easy.difficulty}
+        setPoints={setPoints}
+        points={points}
+        heartCounter={heartCounter}
+        setHeartCounter={setHeartCounter}
+      />
+    );
+  };
+
+  const renderGameOverScreen = () => {
+    return <GameOver restartGame={handleRestartGame} />;
+  };
+
+  let screen = null;
+
+  if (!isGameStarted) {
+    screen = renderInstructionsScreen();
+  } else if (isGameStarted && heartCounter > 0) {
+    screen = renderQuestions();
+  } else if (isGameStarted && heartCounter <= 0) {
+    screen = renderGameOverScreen();
+  }
 
   return (
     <Container id="game" fluid className="full-height">
-      <div className="game-screen">
-        {isGameStarted ? renderQuestions() : renderInstructionsScreen()}
-      </div>
+      <div className="game-screen">{screen}</div>
     </Container>
   );
 }
