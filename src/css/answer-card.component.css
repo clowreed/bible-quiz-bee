@@ -25,9 +25,8 @@
     color: #fff;
   }
 
-  .selected {
-    background-color: gold;
-    color: #fff;
+  #answer-card.selected {
+    border: 5px solid rgb(32, 176, 32);
   }
 }
 

@@ -1,7 +1,7 @@
 import "../css/answer-card.component.css";
 const choices = ["A", "B", "C", "D"];
 
-function QuestionCards({ answer, index, handleClick }) {
+function QuestionCards({ answer, index, handleClick, selectedAnswer }) {
   const handleOnClick = () => {
     handleClick(answer);
   };
@@ -9,7 +9,9 @@ function QuestionCards({ answer, index, handleClick }) {
   return (
     <div
       id="answer-card"
-      className="answer-card-container"
+      className={`answer-card-container ${
+        selectedAnswer === answer ? "selected" : ""
+      }`}
       onClick={handleOnClick}
     >
       <div className="answer">

@@ -99,6 +99,7 @@ function Questions() {
             answer={option}
             index={index}
             handleClick={selectAnswer}
+            selectedAnswer={selectedAnswer}
           />
         </Col>
       );
