@@ -19,6 +19,9 @@ function Game({ username, restartGame }) {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [points, setPoints] = useState(0);
   const [heartCounter, setHeartCounter] = useState(5);
+  const [difficulty, setDifficulty] = useState(
+    DIFFICULTY_LEVEL.easy.difficulty
+  );
   const [instructionText, setInstructionText] = useState(
     `Hello ${username}! ${STEP_1_TEXT}`
   );
@@ -80,7 +83,8 @@ function Game({ username, restartGame }) {
   const renderQuestions = () => {
     return (
       <Questions
-        difficulty={DIFFICULTY_LEVEL.easy.difficulty}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
         setPoints={setPoints}
         points={points}
         heartCounter={heartCounter}

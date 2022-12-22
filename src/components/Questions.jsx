@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,10 +9,19 @@ import AnswerCard from "./AnswerCard";
 import { IoHeart } from "react-icons/io5";
 import CustomIcons from "./CustomIcons";
 import { QUESTIONS } from "../data/quiz-data";
+import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 
-const EASY_LEVEL_ITEMS = 10;
-const MEDIUM_LEVEL_ITEMS = 15;
-const HARD_LEVEL_ITEMS = 20;
+const LEVEL_LIMIT = {
+  easy: 10,
+  medium: 15,
+  hard: 20,
+  expert: 25,
+};
+const MODAL_TYPES = {
+  checkAnswer: "checkAnswer",
+  gameOver: "gameOver",
+  nextLevel: "nextLevel",
+};
 
 const renderHearts = (heartCounter) => {
   const hearts = [];
@@ -33,7 +42,7 @@ const renderHeart = (index) => (
   </CustomIcons>
 );
 
-const getQuestionsData = (difficulty = "easy", limit = EASY_LEVEL_ITEMS) => {
+const getQuestionsData = (difficulty = "easy", limit = LEVEL_LIMIT.easy) => {
   const questions = QUESTIONS.filter((question) => {
     return question.difficulty === difficulty;
   });
@@ -50,29 +59,60 @@ function Questions({
   setPoints,
   heartCounter,
   setHeartCounter,
+  setDifficulty,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
   const [itemCounter, setItemCounter] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState(MODAL_TYPES.checkAnswer);
+
+  const isLevelFinished = useCallback(() => {
+    return itemCounter + 1 > LEVEL_LIMIT[difficulty];
+  }, [itemCounter, difficulty]);
 
   useEffect(() => {
-    const questions = getQuestionsData(difficulty);
+    const questions = getQuestionsData(difficulty, LEVEL_LIMIT[difficulty]);
     setQuizData(questions);
   }, [difficulty]);
 
+  useEffect(() => {
+    if (isLevelFinished() && difficulty !== "difficult") {
+      showNextLevelModal();
+    }
+  }, [isLevelFinished, difficulty]);
+
   const selectAnswer = (answer) => {
     setSelectedAnswer(answer);
+  };
+
+  const showNextLevelModal = () => {
+    setModalType(MODAL_TYPES.nextLevel);
+    setShowModal(true);
   };
 
   const handleNextQuestion = () => {
     handleClose();
     setIsCorrect(false);
     setSelectedAnswer(null);
-    //if (itemCounter <= EASY_LEVEL_ITEMS - 1) {
     if (!isLevelFinished()) {
       setItemCounter(itemCounter + 1);
+    }
+  };
+
+  const startNextLevel = () => {
+    const difficultySetting =
+      difficulty === DIFFICULTY_LEVEL.easy.difficulty
+        ? DIFFICULTY_LEVEL.medium.difficulty
+        : DIFFICULTY_LEVEL.difficult.difficulty;
+    handleClose();
+    setModalType("checkAnswer");
+    if (difficultySetting !== "difficult") {
+      setIsCorrect(false);
+      setSelectedAnswer(null);
+      setItemCounter(0);
+      setDifficulty(difficultySetting);
     }
   };
 
@@ -80,19 +120,15 @@ function Questions({
     if (isLevelFinished()) {
       alert("Level finished!");
     } else {
+      handleShow();
       if (selectedAnswer === quizData[getItemIndex()].getAnswer()) {
         setIsCorrect(true);
-        setPoints(points + 1);
+        setPoints(points + quizData[getItemIndex()].getPoints());
       } else {
         setIsCorrect(false);
         setHeartCounter(heartCounter - 1);
       }
-      handleShow();
     }
-  };
-
-  const isLevelFinished = () => {
-    return itemCounter + 1 > EASY_LEVEL_ITEMS;
   };
 
   const getItemIndex = () => {
@@ -118,7 +154,22 @@ function Questions({
   };
 
   const renderModal = () => {
-    const msg = isCorrect ? "Great!" : "Oops. That is incorrect.";
+    let msg = "";
+    let clickAction = handleNextQuestion;
+    let buttonVariant = "info";
+    let buttonText = "Continue";
+    if (modalType === MODAL_TYPES.checkAnswer) {
+      msg = isCorrect ? "Great!" : "Oops. That is incorrect.";
+      buttonVariant = isCorrect ? "success" : "danger";
+      buttonText = "Continue";
+      clickAction = handleNextQuestion;
+    } else if (modalType === MODAL_TYPES.nextLevel) {
+      msg = "Congratulations! You've made it to the next level.";
+      buttonVariant = "primary";
+      buttonText = "Start next level";
+      clickAction = startNextLevel;
+    }
+
     return (
       <Modal
         show={showModal}
@@ -127,13 +178,15 @@ function Questions({
         centered
         backdrop="static"
       >
+        {modalType !== "checkAnswer" && (
+          <Modal.Header>
+            <Modal.Title>Level up</Modal.Title>
+          </Modal.Header>
+        )}
         <Modal.Body>{msg}</Modal.Body>
         <Modal.Footer>
-          <Button
-            variant={isCorrect ? "success" : "danger"}
-            onClick={handleNextQuestion}
-          >
-            Continue
+          <Button variant={buttonVariant} onClick={clickAction}>
+            {buttonText}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -145,9 +198,22 @@ function Questions({
       {quizData && quizData.length > 0 && (
         <>
           <Container fluid>
+            <Row className="py-2">
+              <Col
+                xs={12}
+                className="d-flex justify-content-center align-content-center"
+              >
+                <div className="difficulty-level-text">
+                  {difficulty.toUpperCase()} ROUND
+                </div>
+              </Col>
+            </Row>
             <Row className="p-0">
               <Col xs={6} md={8} className="pt-1">
-                <QuizProgressBar now={getItemIndex() + 1} />
+                <QuizProgressBar
+                  now={getItemIndex() + 1}
+                  max={LEVEL_LIMIT[difficulty]}
+                />
               </Col>
               <Col
                 xs={4}

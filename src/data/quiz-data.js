@@ -129,11 +129,155 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 15,
-    question: "Who led the Israelites exodus out of Egypt?",
+    question: "Who led the Israelites' exodus out of Egypt?",
     answer: "Moses",
     options: ["David", "Moses", "Aaron", "Judah"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.easy.difficulty,
     points: DIFFICULTY_LEVEL.easy.points
-  })
+  }),
+  new QuizModel({
+    id: 16,
+    question: "Who fashioned the golden calf that the Israelites worshipped?",
+    answer: "Aaron",
+    options: ["Abihu", "Nadab", "Aaron", "Eliezer"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 17,
+    question: "Who was the brother of Mary and Martha that Jesus resurrected?",
+    answer: "Lazarus",
+    options: ["Matthew", "Zaccheus", "Lazarus", "Bartimaeus"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 18,
+    question: "Who was the successor of the prophet Elijah when he ascended to heaven?",
+    answer: "Elisha",
+    options: ["Naaman", "Ahab", "Elisha", "Gehazi"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 19,
+    question: "Who was the king of Israel when the Kingdom of Israel split into two?",
+    answer: "Rehoboam",
+    options: ["Solomon", "Saul", "Rehoboam", "David"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 19,
+    question: "Where did Jesus' family went to when they fled from Herod?",
+    answer: "Egypt",
+    options: ["Capernaum", "Galilee", "Egypt", "Bethlehem"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 20,
+    question: "Who was the tax collector among Jesus' disciples?",
+    answer: "Matthew",
+    options: ["Peter", "Andrew", "James", "Matthew"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 21,
+    question: "Who was the father of Moses?",
+    answer: "Amram",
+    options: ["Aaron", "Amram", "Jacob", "Elihu"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 22,
+    question: "What was the trade of the apostle Paul?",
+    answer: "Tent maker",
+    options: ["Tent maker", "Carpenter", "Baker", "Merchant"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 23,
+    question: "Who was the eldest son of Jacob?",
+    answer: "Reuben",
+    options: ["Simeon", "Reuben", "Joseph", "Levi"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 24,
+    question: "Who was the only daughter of Jacob?",
+    answer: "Dinah",
+    options: ["Dinah", "Rebekah", "Rachel", "Tamar"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 25,
+    question: "Who is Queen Esther's cousin?",
+    answer: "Mordecai",
+    options: ["Haman", "Jonathan", "Mordecai", "Daniel"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 26,
+    question: "Who was the king of Babylon who conquered Judah?",
+    answer: "Nebuchadnezzar",
+    options: ["Ashurbanipal", "Nebuchadnezzar", "Neco", "Rehum"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 27,
+    question: "Who was the husband of Queen Esther?",
+    answer: "Ahasuerus",
+    options: ["Artaxerxes", "Haman", "Mordecai", "Ahasuerus"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 28,
+    question: "What is the longest book of the Bible?",
+    answer: "Psalms",
+    options: ["Deuteronomy", "Psalms", "Revelation", "Isaiah"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 29,
+    question: "What did God command Peter to do when he showed him a vision of a sheet of animals?",
+    answer: "Kill and eat",
+    options: ["Set them free", "Take care of them", "Kill and eat", "Give them away"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 30,
+    question: "Who is the father of Moab?",
+    answer: "Lot",
+    options: ["Esau", "Ham", "Lot", "Jacob"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
 ];

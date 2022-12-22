@@ -45,6 +45,11 @@
     font-family: "Quicksand-Bold";
     font-size: large;
   }
+
+  #game .difficulty-level-text {
+    font-size: large;
+    font-weight: bold;
+  }
 }
 
 @media only screen and (min-width: 480px) {
