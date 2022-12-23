@@ -117,12 +117,10 @@ function Questions({
     }
     handleClose();
     setModalType("checkAnswer");
-    //if (difficultySetting !== "difficult") {
     setIsCorrect(false);
     setSelectedAnswer(null);
     setItemCounter(0);
     setDifficulty(difficultySetting);
-    //}
   };
 
   const handleCheckAnswer = () => {

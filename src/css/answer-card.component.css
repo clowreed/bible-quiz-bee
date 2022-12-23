@@ -20,11 +20,6 @@
     align-items: center;
   }
 
-  #answer-card.answer-card-container:hover {
-    background-color: #333;
-    color: #fff;
-  }
-
   #answer-card.selected {
     border: 5px solid rgb(32, 176, 32);
   }
@@ -45,6 +40,10 @@
 }
 
 @media only screen and (min-width: 1200px) {
+  #answer-card.answer-card-container:hover {
+    background-color: #333;
+    color: #fff;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
