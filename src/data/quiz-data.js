@@ -48,7 +48,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 6,
-    question: "Who was the man thrown into the lion's pit but was rescued by an angel?",
+    question: "Who was the man that was thrown into the lion's den but was rescued by an angel?",
     answer: "Daniel",
     options: ["Hananiah", "Mishael", "Azariah", "Daniel"],
     category: CATEGORIES.general,
@@ -75,7 +75,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 9,
-    question: "Who is referred to as the father of many nations?",
+    question: "Who was referred to as the father of many nations?",
     answer: "Abraham",
     options: ["Jeremiah", "Abraham", "Nathaniel", "Jacob"],
     category: CATEGORIES.general,
@@ -111,7 +111,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 13,
-    question: "Where was the town where the baby Jesus born?",
+    question: "What was the name of the town where the baby Jesus born?",
     answer: "Bethlehem",
     options: ["Nazareth", "Gilead", "Bethlehem", "Bethsaida"],
     category: CATEGORIES.general,
@@ -174,7 +174,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 20,
-    question: "Where did Jesus' family went to when they fled from Herod?",
+    question: "Where did Jesus' family went to when they fled from King Herod?",
     answer: "Egypt",
     options: ["Capernaum", "Galilee", "Egypt", "Bethlehem"],
     category: CATEGORIES.general,
@@ -228,7 +228,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 26,
-    question: "Who is Queen Esther's cousin?",
+    question: "Who was Queen Esther's cousin?",
     answer: "Mordecai",
     options: ["Haman", "Jonathan", "Mordecai", "Daniel"],
     category: CATEGORIES.general,
@@ -264,7 +264,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 30,
-    question: "What did God command Peter to do when he showed him a vision of a sheet of animals?",
+    question: "What did God command Peter to do when He showed him a vision of a sheet of animals?",
     answer: "Kill and eat",
     options: ["Set them free", "Take care of them", "Kill and eat", "Give them away"],
     category: CATEGORIES.general,
@@ -327,7 +327,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 37,
-    question: "How long did Manasseh reign?",
+    question: "How long did King Manasseh reign?",
     answer: "55 years",
     options: ["25 years", "35 years", "45 years", "55 years"],
     category: CATEGORIES.general,
@@ -336,7 +336,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 38,
-    question: "Who was the Persian King who allowed the Jews to return to their homeland?",
+    question: "Who was the Persian king who allowed the Jews to return to their homeland?",
     answer: "Cyrus the Great",
     options: ["Darius the Mede", "Cyrus the Great", "Asshurbanipal", "Nebuchadnezzar"],
     category: CATEGORIES.general,
@@ -381,9 +381,9 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 43,
-    question: "Who was the mother of Joab, David's commander?",
-    answer: "Zeruiah",
-    options: ["Abigal", "Zeruiah", "Elizabeth", "Jochebed"],
+    question: "What did Rachel steal from her father Laban when they fled?",
+    answer: "Household gods",
+    options: ["Household gods", "Silver cup", "Gold jewelries", "Expensive clothes"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
     points: DIFFICULTY_LEVEL.difficult.points
@@ -400,7 +400,7 @@ export const QUESTIONS = [
   new QuizModel({
     id: 45,
     question: "Who was the leader of the 3 mighty warriors of David?",
-    answer: "Luz",
+    answer: "Josheb-basshebeth",
     options: ["Josheb-basshebeth", "Eleazar", "Shammah", "Joab"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
@@ -408,7 +408,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 46,
-    question: "What are the names of the pillars on the temple that King Solomon built?",
+    question: "What are the names of the pillars in the temple that King Solomon built?",
     answer: "Jakin and Boaz",
     options: ["Jannes and Jambres", "Jakin and Boaz", "Urim and Thummim", "Gold and Silver"],
     category: CATEGORIES.general,
@@ -507,7 +507,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 57,
-    question: "Where did God gave the Israelites the 10 commandments?",
+    question: "Where did God give the Israelites the 10 commandments?",
     answer: "Mt. Sinai",
     options: ["Mt. Horeb", "Mt. Sinai", "Mt. Zion", "Mt. Moriah"],
     category: CATEGORIES.general,
@@ -516,7 +516,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 58,
-    question: "Who was the first king of Israel",
+    question: "Who was the first king of Israel?",
     answer: "Saul",
     options: ["Solomon", "David", "Saul", "Samuel"],
     category: CATEGORIES.general,
@@ -525,7 +525,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 59,
-    question: "Who baptized Jesus",
+    question: "Who baptized Jesus?",
     answer: "John",
     options: ["Simon", "John", "Andrew", "Paul"],
     category: CATEGORIES.general,
@@ -579,7 +579,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 65,
-    question: "God forbade Adam and eve to eat the fruit from what tree? ",
+    question: "God forbade Adam and Eve to eat the fruit of what tree? ",
     answer: "Tree of knowledge of good and evil",
     options: ["Tree of life", "Tree of death and destruction", "Tree of wealth and power", "Tree of knowledge of good and evil"],
     category: CATEGORIES.general,
@@ -588,9 +588,9 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 66,
-    question: "God forbade Adam and eve to eat the fruit from what tree? ",
-    answer: "Tree of knowledge of good and evil",
-    options: ["Tree of life", "Tree of death and destruction", "Tree of wealth and power", "Tree of knowledge of good and evil"],
+    question: "The Holy Spirit is represented by which animal?",
+    answer: "A dove",
+    options: ["A lion", "A bull", "A dove", "A sheep"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.easy.difficulty,
     points: DIFFICULTY_LEVEL.easy.points
@@ -606,7 +606,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 68,
-    question: "Who was Jacob's brother? ",
+    question: "Who was Jacob's twin brother? ",
     answer: "Esau",
     options: ["Cain", "Seth", "Esau", "Lot"],
     category: CATEGORIES.general,
@@ -651,7 +651,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 73,
-    question: "Who cut-off Samson's hair?",
+    question: "Who cut off Samson's hair?",
     answer: "A servant",
     options: ["Delilah", "A soldier", "A servant", "Samson"],
     category: CATEGORIES.general,
@@ -678,9 +678,9 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 76,
-    question: "Where did Jesus walk on water?",
-    answer: "Sea of Galilee",
-    options: ["Red Sea", "Sea of Galilee", "Jordan River", "Nile River"],
+    question: "Where was the rock that God instructed Moses to strike so that it will produce water?",
+    answer: "Horeb",
+    options: ["Horeb", "Nebo", "Moriah", "Sinai"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.medium.difficulty,
     points: DIFFICULTY_LEVEL.medium.points
@@ -696,7 +696,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 78,
-    question: "Who is Samuel's mother?",
+    question: "Who was Samuel's mother?",
     answer: "Hannah",
     options: ["Peninah", "Ruth", "Hannah", "Miriam"],
     category: CATEGORIES.general,
@@ -705,7 +705,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 79,
-    question: "What is only book in the Bible that does not contain the word 'God'?",
+    question: "What is the only book in the Bible that does not contain the word 'God'?",
     answer: "Esther",
     options: ["Song of Solomon", "Esther", "Numbers", "Philemon"],
     category: CATEGORIES.general,
@@ -732,9 +732,9 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 82,
-    question: "Samson killed 1000 Philistines using a ____?",
-    answer: "Donkey's jawbone",
-    options: ["Rusty sword", "Broken club", "Donkey's jawbone", "Elephant's tusk"],
+    question: "What was the first bird that Noah let out of the ark?",
+    answer: "Raven",
+    options: ["Dove", "Falcon", "Raven", "Crow"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.medium.difficulty,
     points: DIFFICULTY_LEVEL.medium.points
@@ -750,7 +750,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 84,
-    question: "Who was the prophet who was ordered by God to prophesy in the valley of dry bones?",
+    question: "Who was the prophet that was ordered by God to prophesy in the valley of dry bones?",
     answer: "Ezekiel",
     options: ["Jeremiah", "Daniel", "Ezekiel", "Elijah"],
     category: CATEGORIES.general,
@@ -759,7 +759,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 85,
-    question: "Who was the husband of Batsheba that was ordered to be killed by King David?",
+    question: "Who was the husband of Bathsheba that King David wanted to be killed?",
     answer: "Uriah",
     options: ["Eliezer", "Jashobeam", "Uriah", "Joab"],
     category: CATEGORIES.general,
@@ -768,7 +768,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 86,
-    question: "Which one of the churches from Revelation did not receive rebuke from God?",
+    question: "Which one of the churches from Revelation did not receive any rebuke from God?",
     answer: "Philadelphia",
     options: ["Ephesus", "Philadelphia", "Pergamum", "Sardis"],
     category: CATEGORIES.general,
@@ -804,7 +804,7 @@ export const QUESTIONS = [
   }),
   new QuizModel({
     id: 90,
-    question: "Who was the twin who was tied a scarlet thread in his wrist they were being delivered?",
+    question: "Who was the twin who was tied with a scarlet thread in his wrist as they were being delivered?",
     answer: "Zerah",
     options: ["Perez", "Zerah", "Esau", "Jacob"],
     category: CATEGORIES.general,
