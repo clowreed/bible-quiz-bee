@@ -89,6 +89,7 @@ function Game({ username, restartGame }) {
         points={points}
         heartCounter={heartCounter}
         setHeartCounter={setHeartCounter}
+        restartGame={restartGame}
       />
     );
   };

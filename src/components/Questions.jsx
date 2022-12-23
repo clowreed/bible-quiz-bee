@@ -12,15 +12,16 @@ import { QUESTIONS } from "../data/quiz-data";
 import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 
 const LEVEL_LIMIT = {
-  easy: 10,
+  easy: 20,
   medium: 15,
-  hard: 20,
+  difficult: 10,
   expert: 25,
 };
 const MODAL_TYPES = {
   checkAnswer: "checkAnswer",
   gameOver: "gameOver",
   nextLevel: "nextLevel",
+  gameCompleted: "gameCompleted",
 };
 
 const renderHearts = (heartCounter) => {
@@ -60,6 +61,7 @@ function Questions({
   heartCounter,
   setHeartCounter,
   setDifficulty,
+  restartGame,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
@@ -72,24 +74,29 @@ function Questions({
     return itemCounter + 1 > LEVEL_LIMIT[difficulty];
   }, [itemCounter, difficulty]);
 
+  const showNextLevelModal = useCallback(() => {
+    if (difficulty !== DIFFICULTY_LEVEL.difficult.difficulty) {
+      setModalType(MODAL_TYPES.nextLevel);
+    } else {
+      setModalType(MODAL_TYPES.gameCompleted);
+    }
+
+    setShowModal(true);
+  }, [difficulty]);
+
   useEffect(() => {
     const questions = getQuestionsData(difficulty, LEVEL_LIMIT[difficulty]);
     setQuizData(questions);
   }, [difficulty]);
 
   useEffect(() => {
-    if (isLevelFinished() && difficulty !== "difficult") {
+    if (isLevelFinished()) {
       showNextLevelModal();
     }
-  }, [isLevelFinished, difficulty]);
+  }, [isLevelFinished, difficulty, showNextLevelModal]);
 
   const selectAnswer = (answer) => {
     setSelectedAnswer(answer);
-  };
-
-  const showNextLevelModal = () => {
-    setModalType(MODAL_TYPES.nextLevel);
-    setShowModal(true);
   };
 
   const handleNextQuestion = () => {
@@ -102,18 +109,20 @@ function Questions({
   };
 
   const startNextLevel = () => {
-    const difficultySetting =
-      difficulty === DIFFICULTY_LEVEL.easy.difficulty
-        ? DIFFICULTY_LEVEL.medium.difficulty
-        : DIFFICULTY_LEVEL.difficult.difficulty;
+    let difficultySetting = DIFFICULTY_LEVEL.easy.difficulty;
+    if (difficulty === DIFFICULTY_LEVEL.easy.difficulty) {
+      difficultySetting = DIFFICULTY_LEVEL.medium.difficulty;
+    } else if (difficulty === DIFFICULTY_LEVEL.medium.difficulty) {
+      difficultySetting = DIFFICULTY_LEVEL.difficult.difficulty;
+    }
     handleClose();
     setModalType("checkAnswer");
-    if (difficultySetting !== "difficult") {
-      setIsCorrect(false);
-      setSelectedAnswer(null);
-      setItemCounter(0);
-      setDifficulty(difficultySetting);
-    }
+    //if (difficultySetting !== "difficult") {
+    setIsCorrect(false);
+    setSelectedAnswer(null);
+    setItemCounter(0);
+    setDifficulty(difficultySetting);
+    //}
   };
 
   const handleCheckAnswer = () => {
@@ -168,6 +177,12 @@ function Questions({
       buttonVariant = "primary";
       buttonText = "Start next level";
       clickAction = startNextLevel;
+    } else if (modalType === MODAL_TYPES.gameCompleted) {
+      msg =
+        "Congratulations! You've completed the Quiz. Please claim your NFT and tokens.";
+      buttonVariant = "success";
+      buttonText = "Back to Home";
+      clickAction = restartGame;
     }
 
     return (

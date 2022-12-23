@@ -35,6 +35,7 @@ function Home() {
 
   const restartGame = () => {
     setIsGameStarted(false);
+    setUserName("");
   };
 
   const renderWelcomeScreen = () => {
