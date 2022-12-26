@@ -41,8 +41,8 @@
 
 @media only screen and (min-width: 1200px) {
   #answer-card.answer-card-container:hover {
-    background-color: #333;
-    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.29) 0px 10px 20px,
+      rgba(0, 0, 0, 0.5) 0px 6px 6px;
   }
 }
 

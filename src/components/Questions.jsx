@@ -55,6 +55,18 @@ const randomizeQuestions = (questions) => {
   return questions.sort(() => Math.random() - 0.5);
 };
 
+const renderGameOverImage = () => {
+  return (
+    <div className="badge-container">
+      <img
+        src={Images.wordLamp}
+        className="nft-badge"
+        alt="Your word is a lamp unto my feet and a light unto my path."
+      />
+    </div>
+  );
+};
+
 const renderNftClaim = (difficulty, isWalletConnected, points = 0) => {
   let badge = "";
   let alt = "";
@@ -242,11 +254,12 @@ function Questions({
     } else if (modalType === MODAL_TYPES.gameOver) {
       msg =
         "Your word is a lamp for my feet, a light on my path. Psalm 119:105";
-      title = "Uh oh, try again.";
+      title = "Game over";
       buttonVariant = "danger";
-      buttonText = "Back to Home";
+      buttonText = "Try again";
       clickAction = handleGameOver;
       titleColor = "incorrect";
+      claimNFTScreen = renderGameOverImage();
     }
 
     return (

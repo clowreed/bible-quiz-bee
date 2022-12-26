@@ -23,6 +23,7 @@ function Welcome({
         onHide={handleCloseModal}
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        animation={false}
       >
         <Modal.Header closeButton>
           <Modal.Title>What shall I call you?</Modal.Title>

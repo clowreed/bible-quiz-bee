@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Questions from "../components/Questions";
-import GameOver from "../components/GameOver";
 import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 
 const STEP_1_TEXT = `This app will test your knowledge about the Bible.
