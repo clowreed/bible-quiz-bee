@@ -59,9 +59,48 @@
   }
 
   .badge-container .nft-badge {
-    width: 220px;
-    height: 220px;
-    margin: 10px 0;
+    width: 200px;
+    height: 200px;
+  }
+
+  .modal-text {
+    font-family: "Quicksand-Semibold";
+    font-weight: bold;
+    font-size: large;
+  }
+
+  .claim-button-container {
+    margin-bottom: 10px;
+  }
+
+  .wallet-warning {
+    font-size: x-small;
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .modal-title.game {
+    font-family: "Quicksand-Bold";
+    font-weight: bold;
+  }
+
+  .modal-title.game.correct {
+    color: green;
+  }
+
+  .modal-title.game.incorrect {
+    color: red;
+  }
+
+  .modal-title.game.level-up {
+    color: goldenrod;
+  }
+
+  .btn {
+    font-family: "Quicksand-Bold";
+    font-weight: bold;
+    font-size: x-large;
   }
 }
 
@@ -87,9 +126,14 @@
   }
 
   .badge-container .nft-badge {
-    width: 360px;
-    height: 360px;
-    margin: 10px 0;
+    width: 340px;
+    height: 340px;
+  }
+
+  .modal-text {
+    font-family: "Quicksand-Semibold";
+    font-weight: bold;
+    font-size: x-large;
   }
 }
 
@@ -101,8 +145,7 @@
 
 @media only screen and (min-width: 1400px) {
   .badge-container .nft-badge {
-    width: 450px;
-    height: 450px;
-    margin: 10px 0;
+    width: 430px;
+    height: 430px;
   }
 }

@@ -15,7 +15,7 @@ import Images from "../assets/images";
 const LEVEL_LIMIT = {
   easy: 20,
   medium: 15,
-  difficult: 10,
+  difficult: 20,
   expert: 25,
 };
 const MODAL_TYPES = {
@@ -55,7 +55,7 @@ const randomizeQuestions = (questions) => {
   return questions.sort(() => Math.random() - 0.5);
 };
 
-const renderRookieClaim = (difficulty) => {
+const renderNftClaim = (difficulty, isWalletConnected, points = 0) => {
   let badge = "";
   let alt = "";
   if (difficulty === DIFFICULTY_LEVEL.easy.difficulty) {
@@ -72,8 +72,21 @@ const renderRookieClaim = (difficulty) => {
   return (
     <div className="badge-container">
       <img src={badge} className="nft-badge" alt={alt} />
-      <div>
-        <Button variant="info">Claim NFT</Button>
+      <div className="claim-button-container">
+        <Button variant="warning" disabled={!isWalletConnected}>
+          Claim NFT
+        </Button>
+      </div>
+      {difficulty === DIFFICULTY_LEVEL.difficult.difficulty && points !== 0 && (
+        <div className="token-claim-container">
+          <Button variant="info" disabled={!isWalletConnected}>
+            {`Claim ${points} Tokens`}
+          </Button>
+        </div>
+      )}
+      <div className="wallet-warning">
+        Please make sure your MetaMask wallet is connected in order to claim
+        this NFT.
       </div>
     </div>
   );
@@ -87,6 +100,7 @@ function Questions({
   setHeartCounter,
   setDifficulty,
   restartGame,
+  isWalletConnected,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
@@ -191,24 +205,34 @@ function Questions({
     let buttonVariant = "info";
     let buttonText = "Continue";
     let claimNFTScreen = null;
+    let title = "";
+    let titleColor = "black";
     if (modalType === MODAL_TYPES.checkAnswer) {
-      msg = isCorrect ? "Great!" : "Oops. That is incorrect.";
+      msg = isCorrect
+        ? "Great! You're nailing it."
+        : "Oops. You could do better than that.";
+      title = isCorrect ? "Correct!" : "Incorrect!";
       buttonVariant = isCorrect ? "success" : "danger";
       buttonText = "Continue";
       clickAction = handleNextQuestion;
+      titleColor = isCorrect ? "correct" : "incorrect";
     } else if (modalType === MODAL_TYPES.nextLevel) {
       msg = `Congratulations! You've made it to the next level.`;
+      title = "Level up!";
       buttonVariant = "primary";
       buttonText = "Start next level";
       clickAction = startNextLevel;
-      claimNFTScreen = renderRookieClaim(difficulty);
+      claimNFTScreen = renderNftClaim(difficulty, isWalletConnected);
+      titleColor = "level-up";
     } else if (modalType === MODAL_TYPES.gameCompleted) {
+      title = "You've made it!";
       msg =
         "Congratulations! You've completed the Quiz. Please claim your NFT and tokens.";
       buttonVariant = "success";
       buttonText = "Back to Home";
-      claimNFTScreen = renderRookieClaim(difficulty);
+      claimNFTScreen = renderNftClaim(difficulty, isWalletConnected, points);
       clickAction = restartGame;
+      titleColor = "level-up";
     }
 
     return (
@@ -218,14 +242,15 @@ function Questions({
         aria-labelledby="contained-modal-title-vcenter"
         centered
         backdrop="static"
+        animation={false}
       >
-        {modalType !== "checkAnswer" && (
-          <Modal.Header>
-            <Modal.Title>Level up</Modal.Title>
-          </Modal.Header>
-        )}
+        <Modal.Header>
+          <Modal.Title className={`modal-title game ${titleColor}`}>
+            {title}
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body>
-          <div className="text-center">{msg}</div>
+          <div className="modal-text text-center">{msg}</div>
           {claimNFTScreen}
         </Modal.Body>
         <Modal.Footer>

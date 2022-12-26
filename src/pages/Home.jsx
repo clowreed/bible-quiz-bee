@@ -6,6 +6,7 @@ function Home() {
   const [username, setUserName] = useState("");
   const [isPlayingAsGuest, setIsPlayingAsGuest] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
 
   const handleGuestLogin = () => {
     setShowGuestInput(true);
@@ -54,7 +55,13 @@ function Home() {
   };
 
   const renderGameScreen = () => {
-    return <Game username={username} restartGame={restartGame} />;
+    return (
+      <Game
+        username={username}
+        restartGame={restartGame}
+        isWalletConnected={isWalletConnected}
+      />
+    );
   };
 
   const screen = isGameStarted ? renderGameScreen() : renderWelcomeScreen();
