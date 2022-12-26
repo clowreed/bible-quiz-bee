@@ -50,6 +50,19 @@
     font-size: large;
     font-weight: bold;
   }
+
+  .badge-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .badge-container .nft-badge {
+    width: 220px;
+    height: 220px;
+    margin: 10px 0;
+  }
 }
 
 @media only screen and (min-width: 480px) {
@@ -72,6 +85,12 @@
   #game .question-text {
     font-size: xx-large;
   }
+
+  .badge-container .nft-badge {
+    width: 360px;
+    height: 360px;
+    margin: 10px 0;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -81,4 +100,9 @@
 }
 
 @media only screen and (min-width: 1400px) {
+  .badge-container .nft-badge {
+    width: 450px;
+    height: 450px;
+    margin: 10px 0;
+  }
 }

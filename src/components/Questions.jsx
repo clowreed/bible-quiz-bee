@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Im } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,6 +10,7 @@ import { IoHeart } from "react-icons/io5";
 import CustomIcons from "./CustomIcons";
 import { QUESTIONS } from "../data/quiz-data";
 import { DIFFICULTY_LEVEL } from "../models/quiz-model";
+import Images from "../assets/images";
 
 const LEVEL_LIMIT = {
   easy: 20,
@@ -52,6 +53,30 @@ const getQuestionsData = (difficulty = "easy", limit = LEVEL_LIMIT.easy) => {
 
 const randomizeQuestions = (questions) => {
   return questions.sort(() => Math.random() - 0.5);
+};
+
+const renderRookieClaim = (difficulty) => {
+  let badge = "";
+  let alt = "";
+  if (difficulty === DIFFICULTY_LEVEL.easy.difficulty) {
+    badge = Images.bibleRookie;
+    alt = "Bible Rookie";
+  } else if (difficulty === DIFFICULTY_LEVEL.medium.difficulty) {
+    badge = Images.bibleAdept;
+    alt = "Bible Adept";
+  } else if (difficulty === DIFFICULTY_LEVEL.difficult.difficulty) {
+    badge = Images.bibleGuru;
+    alt = "Bible Guru";
+  }
+
+  return (
+    <div className="badge-container">
+      <img src={badge} className="nft-badge" alt={alt} />
+      <div>
+        <Button variant="info">Claim NFT</Button>
+      </div>
+    </div>
+  );
 };
 
 function Questions({
@@ -165,21 +190,24 @@ function Questions({
     let clickAction = handleNextQuestion;
     let buttonVariant = "info";
     let buttonText = "Continue";
+    let claimNFTScreen = null;
     if (modalType === MODAL_TYPES.checkAnswer) {
       msg = isCorrect ? "Great!" : "Oops. That is incorrect.";
       buttonVariant = isCorrect ? "success" : "danger";
       buttonText = "Continue";
       clickAction = handleNextQuestion;
     } else if (modalType === MODAL_TYPES.nextLevel) {
-      msg = "Congratulations! You've made it to the next level.";
+      msg = `Congratulations! You've made it to the next level.`;
       buttonVariant = "primary";
       buttonText = "Start next level";
       clickAction = startNextLevel;
+      claimNFTScreen = renderRookieClaim(difficulty);
     } else if (modalType === MODAL_TYPES.gameCompleted) {
       msg =
         "Congratulations! You've completed the Quiz. Please claim your NFT and tokens.";
       buttonVariant = "success";
       buttonText = "Back to Home";
+      claimNFTScreen = renderRookieClaim(difficulty);
       clickAction = restartGame;
     }
 
@@ -196,7 +224,10 @@ function Questions({
             <Modal.Title>Level up</Modal.Title>
           </Modal.Header>
         )}
-        <Modal.Body>{msg}</Modal.Body>
+        <Modal.Body>
+          <div className="text-center">{msg}</div>
+          {claimNFTScreen}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant={buttonVariant} onClick={clickAction}>
             {buttonText}
