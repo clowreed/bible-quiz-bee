@@ -74,7 +74,7 @@ function Game({ username, restartGame, isWalletConnected }) {
     );
   };
 
-  const handleRestartGame = () => {
+  const handleGameOver = () => {
     setHeartCounter(5);
     setPoints(0);
     restartGame();
@@ -91,23 +91,12 @@ function Game({ username, restartGame, isWalletConnected }) {
         setHeartCounter={setHeartCounter}
         restartGame={restartGame}
         isWalletConnected={isWalletConnected}
+        handleGameOver={handleGameOver}
       />
     );
   };
 
-  const renderGameOverScreen = () => {
-    return <GameOver restartGame={handleRestartGame} />;
-  };
-
-  let screen = null;
-
-  if (!isGameStarted) {
-    screen = renderInstructionsScreen();
-  } else if (isGameStarted && heartCounter > 0) {
-    screen = renderQuestions();
-  } else if (isGameStarted && heartCounter <= 0) {
-    screen = renderGameOverScreen();
-  }
+  const screen = isGameStarted ? renderQuestions() : renderInstructionsScreen();
 
   return (
     <Container id="game" fluid className="full-height">

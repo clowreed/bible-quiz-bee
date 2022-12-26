@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, Im } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -101,6 +101,7 @@ function Questions({
   setDifficulty,
   restartGame,
   isWalletConnected,
+  handleGameOver,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
@@ -119,7 +120,6 @@ function Questions({
     } else {
       setModalType(MODAL_TYPES.gameCompleted);
     }
-
     setShowModal(true);
   }, [difficulty]);
 
@@ -133,6 +133,12 @@ function Questions({
       showNextLevelModal();
     }
   }, [isLevelFinished, difficulty, showNextLevelModal]);
+
+  useEffect(() => {
+    if (heartCounter === 0) {
+      setModalType(MODAL_TYPES.gameOver);
+    }
+  }, [heartCounter]);
 
   const selectAnswer = (answer) => {
     setSelectedAnswer(answer);
@@ -233,6 +239,14 @@ function Questions({
       claimNFTScreen = renderNftClaim(difficulty, isWalletConnected, points);
       clickAction = restartGame;
       titleColor = "level-up";
+    } else if (modalType === MODAL_TYPES.gameOver) {
+      msg =
+        "Your word is a lamp for my feet, a light on my path. Psalm 119:105";
+      title = "Uh oh, try again.";
+      buttonVariant = "danger";
+      buttonText = "Back to Home";
+      clickAction = handleGameOver;
+      titleColor = "incorrect";
     }
 
     return (
