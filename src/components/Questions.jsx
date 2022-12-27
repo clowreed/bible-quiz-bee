@@ -25,6 +25,30 @@ const MODAL_TYPES = {
   gameCompleted: "gameCompleted",
 };
 
+const CORRECT_ANSWER_MESSAGES = [
+  "Great! ",
+  "Good Job!",
+  "Amazing!",
+  "Nice!",
+  "You're nailing it!",
+  "Keep it up!",
+  "Wonderful!",
+  "Splendid!",
+  "Perfect!",
+  "Alright!",
+];
+
+const WRONG_ANSWER_MESSAGES = [
+  "Oops. You could do better than that.",
+  "I'm sorry, that's not the right answer",
+  "That's wrong!",
+  "Try harder.",
+  "You can get it next time.",
+  "Uh, oh, wrong answer.",
+  "Try again.",
+  "Better luck next time.",
+];
+
 const renderHearts = (heartCounter) => {
   const hearts = [];
   for (let i = 0; i < heartCounter; i++) {
@@ -48,10 +72,10 @@ const getQuestionsData = (difficulty = "easy", limit = LEVEL_LIMIT.easy) => {
   const questions = QUESTIONS.filter((question) => {
     return question.difficulty === difficulty;
   });
-  return randomizeQuestions(questions).slice(0, limit);
+  return randomizeArray(questions).slice(0, limit);
 };
 
-const randomizeQuestions = (questions) => {
+const randomizeArray = (questions) => {
   return questions.sort(() => Math.random() - 0.5);
 };
 
@@ -229,10 +253,11 @@ function Questions({
     let claimNFTScreen = null;
     let title = "";
     let titleColor = "black";
+    const correctAnswerMsg = randomizeArray(CORRECT_ANSWER_MESSAGES)[0];
+    const wrongAnswerMsg = randomizeArray(WRONG_ANSWER_MESSAGES)[0];
+
     if (modalType === MODAL_TYPES.checkAnswer) {
-      msg = isCorrect
-        ? "Great! You're nailing it."
-        : "Oops. You could do better than that.";
+      msg = isCorrect ? correctAnswerMsg : wrongAnswerMsg;
       title = isCorrect ? "Correct!" : "Incorrect!";
       buttonVariant = isCorrect ? "success" : "danger";
       buttonText = "Continue";
