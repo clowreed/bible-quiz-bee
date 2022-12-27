@@ -184,13 +184,17 @@ function Questions({
     if (isLevelFinished()) {
       alert("Level finished!");
     } else {
-      handleShow();
-      if (selectedAnswer === quizData[getItemIndex()].getAnswer()) {
-        setIsCorrect(true);
-        setPoints(points + quizData[getItemIndex()].getPoints());
+      if (selectedAnswer) {
+        handleShow();
+        if (selectedAnswer === quizData[getItemIndex()].getAnswer()) {
+          setIsCorrect(true);
+          setPoints(points + quizData[getItemIndex()].getPoints());
+        } else {
+          setIsCorrect(false);
+          setHeartCounter(heartCounter - 1);
+        }
       } else {
-        setIsCorrect(false);
-        setHeartCounter(heartCounter - 1);
+        alert("Please select an answer");
       }
     }
   };
