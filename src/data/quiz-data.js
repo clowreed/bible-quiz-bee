@@ -797,7 +797,7 @@ export const QUESTIONS = [
     id: 89,
     question: "Who replaced Judas Iscariot as an apostle?",
     answer: "Matthias",
-    options: ["Stephen", "Matthias", "Purim", "Hanukkah"],
+    options: ["Stephen", "Matthias", "Ananias", "Simon Magus"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
     points: DIFFICULTY_LEVEL.difficult.points
@@ -811,4 +811,32 @@ export const QUESTIONS = [
     difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
     points: DIFFICULTY_LEVEL.difficult.points
   }),
+  new QuizModel({
+    id: 91,
+    question: "Who was the third son of Adam and Eve mentioned by name?",
+    answer: "Seth",
+    options: ["Lamech", "Cain", "Abel", "Seth"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 92,
+    question: "Who was the father of Abraham?",
+    answer: "Terah",
+    options: ["Haran", "Terah", "Laban", "Lamech"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 93,
+    question: "When Jacob gave his final blessings to his sons, which of his sons did he likened to a serpent by the roadside?",
+    answer: "Dan",
+    options: ["Dan", "Levi", "Issachar", "Asher"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.hard.difficulty,
+    points: DIFFICULTY_LEVEL.hard.points
+  }),
+
 ];
