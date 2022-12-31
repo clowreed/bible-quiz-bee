@@ -835,8 +835,7 @@ export const QUESTIONS = [
     answer: "Dan",
     options: ["Dan", "Levi", "Issachar", "Asher"],
     category: CATEGORIES.general,
-    difficulty: DIFFICULTY_LEVEL.hard.difficulty,
-    points: DIFFICULTY_LEVEL.hard.points
-  }),
-
+    difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
+    points: DIFFICULTY_LEVEL.difficult.points
+  })
 ];
