@@ -15,7 +15,7 @@ import Images from "../assets/images";
 const LEVEL_LIMIT = {
   easy: 20,
   medium: 15,
-  difficult: 20,
+  difficult: 10,
   expert: 25,
 };
 const MODAL_TYPES = {
