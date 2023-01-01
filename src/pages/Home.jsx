@@ -1,12 +1,15 @@
 import { useState } from "react";
+import Web3 from "web3";
 import Welcome from "../components/Welcome";
 import Game from "./Game";
+
 function Home() {
   const [showGuestInput, setShowGuestInput] = useState("");
   const [username, setUserName] = useState("");
   const [isPlayingAsGuest, setIsPlayingAsGuest] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [accounts, setAccounts] = useState([]);
 
   const handleGuestLogin = () => {
     setShowGuestInput(true);
@@ -26,8 +29,17 @@ function Home() {
       alert("Please enter a valid username");
       return;
     }
-    setIsPlayingAsGuest(true);
+    if (!isWalletConnected) {
+      setIsPlayingAsGuest(true);
+    }
     handleCloseModal();
+  };
+
+  const disconnectWallet = () => {
+    setAccounts([]);
+    setIsWalletConnected(false);
+    setUserName("");
+    setIsPlayingAsGuest(true);
   };
 
   const startGame = () => {
@@ -37,6 +49,22 @@ function Home() {
   const restartGame = () => {
     setIsGameStarted(false);
     setUserName("");
+  };
+
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      const web3 = new Web3(Web3.givenProvider);
+      const network = await web3.eth.net.getNetworkType();
+      if (network !== "goerli") {
+        alert("Please connect to Goerli network");
+        return;
+      }
+      const account = await web3.eth.requestAccounts();
+      setIsWalletConnected(true);
+      setAccounts(account);
+    } else {
+      alert("Please install MetaMask first.");
+    }
   };
 
   const renderWelcomeScreen = () => {
@@ -49,7 +77,10 @@ function Home() {
         handleCloseModal={handleCloseModal}
         handleTextInput={handleTextInput}
         handleSaveGuest={handleSaveGuest}
+        disconnectWallet={disconnectWallet}
         startGame={startGame}
+        connectWallet={connectWallet}
+        isWalletConnected={isWalletConnected}
       />
     );
   };
@@ -60,6 +91,7 @@ function Home() {
         username={username}
         restartGame={restartGame}
         isWalletConnected={isWalletConnected}
+        accounts={accounts}
       />
     );
   };

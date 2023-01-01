@@ -13,7 +13,7 @@ const STEP_2_TEXT = `You will start with 5 hearts, and if you consume all your h
 
 const STEP_3_TEXT = `Once you are ready, click the Start button to begin. Good luck!`;
 
-function Game({ username, restartGame, isWalletConnected }) {
+function Game({ username, restartGame, isWalletConnected, accounts }) {
   const [step, setNextStep] = useState(1);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [points, setPoints] = useState(0);
@@ -91,6 +91,7 @@ function Game({ username, restartGame, isWalletConnected }) {
         restartGame={restartGame}
         isWalletConnected={isWalletConnected}
         handleGameOver={handleGameOver}
+        accounts={accounts}
       />
     );
   };

@@ -15,6 +15,9 @@ function Welcome({
   handleTextInput,
   handleSaveGuest,
   startGame,
+  connectWallet,
+  disconnectWallet,
+  isWalletConnected,
 }) {
   const renderModal = () => {
     return (
@@ -50,6 +53,16 @@ function Welcome({
   };
 
   const renderTitleScreen = () => {
+    let loginButtonText = "Login as Guest";
+
+    if (username !== "") {
+      loginButtonText = `Hello, ${username}!`;
+    } else {
+      if (isWalletConnected) {
+        loginButtonText = "Enter username";
+      }
+    }
+
     return (
       <div className="main-container">
         <div className="text-center title-screen-container">
@@ -64,8 +77,12 @@ function Welcome({
                 lg={{ span: 3 }}
                 xs={12}
               >
-                <Button variant="info" size="lg">
-                  Connect Wallet
+                <Button
+                  variant="info"
+                  size="lg"
+                  onClick={isWalletConnected ? disconnectWallet : connectWallet}
+                >
+                  {isWalletConnected ? "Disconnect" : "Connect Wallet"}
                 </Button>
               </Col>
               <Col
@@ -79,13 +96,12 @@ function Welcome({
                   onClick={handleGuestLogin}
                   size="lg"
                 >
-                  {isPlayingAsGuest && username !== ""
-                    ? `Hello, ${username}!`
-                    : "Login as Guest"}
+                  {loginButtonText}
                 </Button>
               </Col>
             </Row>
-            {isPlayingAsGuest && username !== "" && (
+            {((isPlayingAsGuest && username !== "") ||
+              (isWalletConnected && username !== "")) && (
               <Row className="pt-3 pt-md-5">
                 <Col>{renderStart()}</Col>
               </Row>
