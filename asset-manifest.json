@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/bible-quiz-bee/static/css/main.07731e5f.css",
-    "main.js": "/bible-quiz-bee/static/js/main.3b7a0a00.js",
+    "main.css": "/bible-quiz-bee/static/css/main.1da5e093.css",
+    "main.js": "/bible-quiz-bee/static/js/main.3e4d4e4b.js",
     "static/js/787.e1d1926c.chunk.js": "/bible-quiz-bee/static/js/787.e1d1926c.chunk.js",
     "static/media/bible-rookie.png": "/bible-quiz-bee/static/media/bible-rookie.a415c8a576ca62f0364b.png",
     "static/media/bible-guru.png": "/bible-quiz-bee/static/media/bible-guru.7325fb28a6c4928d3db0.png",
@@ -13,12 +13,12 @@
     "static/media/Quicksand-Light.ttf": "/bible-quiz-bee/static/media/Quicksand-Light.a7f8083e8b93da348dcc.ttf",
     "static/media/Quicksand-Bold.ttf": "/bible-quiz-bee/static/media/Quicksand-Bold.a0a11318dd0b528da77d.ttf",
     "index.html": "/bible-quiz-bee/index.html",
-    "main.07731e5f.css.map": "/bible-quiz-bee/static/css/main.07731e5f.css.map",
-    "main.3b7a0a00.js.map": "/bible-quiz-bee/static/js/main.3b7a0a00.js.map",
+    "main.1da5e093.css.map": "/bible-quiz-bee/static/css/main.1da5e093.css.map",
+    "main.3e4d4e4b.js.map": "/bible-quiz-bee/static/js/main.3e4d4e4b.js.map",
     "787.e1d1926c.chunk.js.map": "/bible-quiz-bee/static/js/787.e1d1926c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.07731e5f.css",
-    "static/js/main.3b7a0a00.js"
+    "static/css/main.1da5e093.css",
+    "static/js/main.3e4d4e4b.js"
   ]
 }
