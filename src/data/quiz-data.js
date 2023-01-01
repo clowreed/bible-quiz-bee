@@ -490,8 +490,8 @@ export const QUESTIONS = [
   new QuizModel({
     id: 55,
     question: "Where did Moses' mother hide the baby Moses to save him from getting killed?",
-    answer: "basket made of reeds",
-    options: ["under the bed", "basket made of reeds", "behind a palm tree", "rooftop"],
+    answer: "Basket made of reeds",
+    options: ["Under the bed", "Basket made of reeds", "Behind a palm tree", "Rooftop"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.easy.difficulty,
     points: DIFFICULTY_LEVEL.easy.points
