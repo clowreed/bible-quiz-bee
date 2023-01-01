@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import QuizProgressBar from "./QuizProgressBar";
 import AnswerCard from "./AnswerCard";
-import { IoHeart } from "react-icons/io5";
+import { FaHeart, FaEthereum } from "react-icons/fa";
 import CustomIcons from "./CustomIcons";
 import { QUESTIONS } from "../data/quiz-data";
 import { DIFFICULTY_LEVEL } from "../models/quiz-model";
@@ -35,18 +35,21 @@ const CORRECT_ANSWER_MESSAGES = [
   "Wonderful!",
   "Splendid!",
   "Perfect!",
-  "Alright!",
+  "Yay!",
+  "Fantastic!",
 ];
 
 const WRONG_ANSWER_MESSAGES = [
-  "Oops. You could do better than that.",
+  "Oops.",
   "I'm sorry, that's not the right answer",
   "That's wrong!",
   "Try harder.",
   "You can get it next time.",
-  "Uh, oh, wrong answer.",
+  "Uh-oh, wrong answer.",
   "Try again.",
   "Better luck next time.",
+  "You could do better than that.",
+  "Almost had it.",
 ];
 
 const renderHearts = (heartCounter) => {
@@ -64,7 +67,13 @@ const renderHearts = (heartCounter) => {
 
 const renderHeart = (index) => (
   <CustomIcons color="red" key={index}>
-    <IoHeart />
+    <FaHeart />
+  </CustomIcons>
+);
+
+const renderEthIcon = () => (
+  <CustomIcons color="blue">
+    <FaEthereum />
   </CustomIcons>
 );
 
@@ -108,22 +117,29 @@ const renderNftClaim = (difficulty, isWalletConnected, points = 0) => {
   return (
     <div className="badge-container">
       <img src={badge} className="nft-badge" alt={alt} />
-      <div className="claim-button-container">
-        <Button variant="warning" disabled={!isWalletConnected}>
-          Claim NFT
-        </Button>
-      </div>
-      {difficulty === DIFFICULTY_LEVEL.difficult.difficulty && points !== 0 && (
-        <div className="token-claim-container">
-          <Button variant="info" disabled={!isWalletConnected}>
-            {`Claim ${points} Tokens`}
+      {isWalletConnected && (
+        <div className="claim-button-container">
+          <Button variant="warning" disabled={!isWalletConnected}>
+            Claim NFT
           </Button>
         </div>
       )}
-      <div className="wallet-warning">
-        Please make sure your MetaMask wallet is connected in order to claim
-        this NFT.
-      </div>
+
+      {difficulty === DIFFICULTY_LEVEL.difficult.difficulty &&
+        points !== 0 &&
+        isWalletConnected && (
+          <div className="token-claim-container">
+            <Button variant="info" disabled={!isWalletConnected}>
+              {`Claim ${points} Tokens`}
+            </Button>
+          </div>
+        )}
+      {isWalletConnected && (
+        <div className="wallet-warning">
+          Please make sure your MetaMask wallet is connected in order to claim
+          this NFT.
+        </div>
+      )}
     </div>
   );
 };
@@ -138,6 +154,7 @@ function Questions({
   restartGame,
   isWalletConnected,
   handleGameOver,
+  accounts,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
@@ -233,7 +250,7 @@ function Questions({
   const renderOptions = () => {
     return quizData[getItemIndex()].getOptions().map((option, index) => {
       return (
-        <Col key={option} xs={6} className="d-flex justify-content-center py-2">
+        <Col key={option} xs={6} className="d-flex justify-content-center py-1">
           <AnswerCard
             answer={option}
             index={index}
@@ -320,10 +337,19 @@ function Questions({
 
   return (
     <div className="question-container">
+      {isWalletConnected && accounts.length > 0 && (
+        <div className="status-bar-container">
+          <div className="address-container">{accounts[0]}</div>
+          <div className="network-container d-flex justify-content-end">
+            {renderEthIcon()} Goerli
+          </div>
+        </div>
+      )}
+
       {quizData && quizData.length > 0 && (
         <>
           <Container fluid>
-            <Row className="py-2">
+            <Row className="py-1">
               <Col
                 xs={12}
                 className="d-flex justify-content-center align-content-center"
@@ -347,7 +373,11 @@ function Questions({
               >
                 {renderHearts(heartCounter)}
               </Col>
-              <Col xs={2} md={2} className="pt-1">
+              <Col
+                xs={2}
+                md={2}
+                className="pt-1 d-flex justify-content-end align-content-end available-points"
+              >
                 {points} pts.
               </Col>
             </Row>
