@@ -102,6 +102,25 @@
     font-weight: bold;
     font-size: x-large;
   }
+
+  #game .status-bar-container {
+    font-size: x-small;
+    display: flex;
+    flex-direction: row;
+  }
+
+  #game .address-container {
+    flex: 3;
+  }
+
+  #game .network-container {
+    flex: 1;
+  }
+
+  #game .available-points {
+    font-size: x-small;
+    font-weight: bold;
+  }
 }
 
 @media only screen and (min-width: 480px) {
@@ -135,11 +154,21 @@
     font-weight: bold;
     font-size: x-large;
   }
+
+  #game .available-points {
+    font-size: large;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
   #game .question-container {
     width: 50%;
+  }
+
+  #game .status-bar-container {
+    font-size: small;
+    display: flex;
+    flex-direction: row;
   }
 }
 
