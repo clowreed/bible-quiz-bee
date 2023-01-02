@@ -26,8 +26,8 @@ const MODAL_TYPES = {
 };
 
 const CORRECT_ANSWER_MESSAGES = [
-  "Great! ",
-  "Good Job!",
+  "Great!",
+  "Good job!",
   "Amazing!",
   "Nice!",
   "You're nailing it!",
@@ -40,7 +40,7 @@ const CORRECT_ANSWER_MESSAGES = [
 ];
 
 const WRONG_ANSWER_MESSAGES = [
-  "Oops.",
+  "Oops!",
   "I'm sorry, that's not the right answer",
   "That's wrong!",
   "Try harder.",
@@ -49,7 +49,7 @@ const WRONG_ANSWER_MESSAGES = [
   "Try again.",
   "Better luck next time.",
   "You could do better than that.",
-  "Almost had it.",
+  "That was close.",
 ];
 
 const renderHearts = (heartCounter) => {
