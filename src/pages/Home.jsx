@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Web3 from "web3";
+import { useState, useEffect } from "react";
 import Welcome from "../components/Welcome";
 import Game from "./Game";
+import { requestAccounts, accountChange } from "../web3";
 
 function Home() {
   const [showGuestInput, setShowGuestInput] = useState("");
@@ -10,6 +10,10 @@ function Home() {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [accounts, setAccounts] = useState([]);
+
+  useEffect(() => {
+    accountChange(setAccounts);
+  }, []);
 
   const handleGuestLogin = () => {
     setShowGuestInput(true);
@@ -51,19 +55,11 @@ function Home() {
     setUserName("");
   };
 
-  const connectWallet = async () => {
-    if (window.ethereum) {
-      const web3 = new Web3(Web3.givenProvider);
-      const network = await web3.eth.net.getNetworkType();
-      if (network !== "goerli") {
-        alert("Please connect to Goerli network");
-        return;
-      }
-      const account = await web3.eth.requestAccounts();
+  const handleConnectWallet = async () => {
+    const acc = await requestAccounts();
+    if (acc && acc.length > 0) {
       setIsWalletConnected(true);
-      setAccounts(account);
-    } else {
-      alert("Please install MetaMask first.");
+      setAccounts(acc);
     }
   };
 
@@ -79,7 +75,7 @@ function Home() {
         handleSaveGuest={handleSaveGuest}
         disconnectWallet={disconnectWallet}
         startGame={startGame}
-        connectWallet={connectWallet}
+        connectWallet={handleConnectWallet}
         isWalletConnected={isWalletConnected}
       />
     );
