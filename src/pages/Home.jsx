@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Welcome from "../components/Welcome";
 import Game from "./Game";
-import { requestAccounts, accountChange } from "../web3";
+import { requestAccounts, accountChange, initializeContracts } from "../web3";
 
 function Home() {
   const [showGuestInput, setShowGuestInput] = useState("");
@@ -60,6 +60,7 @@ function Home() {
     if (acc && acc.length > 0) {
       setIsWalletConnected(true);
       setAccounts(acc);
+      initializeContracts();
     }
   };
 

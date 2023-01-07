@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import QuizProgressBar from "./QuizProgressBar";
 import AnswerCard from "./AnswerCard";
@@ -11,6 +12,7 @@ import CustomIcons from "./CustomIcons";
 import { QUESTIONS } from "../data/quiz-data";
 import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 import Images from "../assets/images";
+import { mintToken } from "../web3";
 
 const LEVEL_LIMIT = {
   easy: 20,
@@ -100,50 +102,6 @@ const renderGameOverImage = () => {
   );
 };
 
-const renderNftClaim = (difficulty, isWalletConnected, points = 0) => {
-  let badge = "";
-  let alt = "";
-  if (difficulty === DIFFICULTY_LEVEL.easy.difficulty) {
-    badge = Images.bibleRookie;
-    alt = "Bible Rookie";
-  } else if (difficulty === DIFFICULTY_LEVEL.medium.difficulty) {
-    badge = Images.bibleAdept;
-    alt = "Bible Adept";
-  } else if (difficulty === DIFFICULTY_LEVEL.difficult.difficulty) {
-    badge = Images.bibleGuru;
-    alt = "Bible Guru";
-  }
-
-  return (
-    <div className="badge-container">
-      <img src={badge} className="nft-badge" alt={alt} />
-      {isWalletConnected && (
-        <div className="claim-button-container">
-          <Button variant="warning" disabled={!isWalletConnected}>
-            Claim NFT
-          </Button>
-        </div>
-      )}
-
-      {difficulty === DIFFICULTY_LEVEL.difficult.difficulty &&
-        points !== 0 &&
-        isWalletConnected && (
-          <div className="token-claim-container">
-            <Button variant="info" disabled={!isWalletConnected}>
-              {`Claim ${points} Tokens`}
-            </Button>
-          </div>
-        )}
-      {isWalletConnected && (
-        <div className="wallet-warning">
-          Please make sure your MetaMask wallet is connected in order to claim
-          this NFT.
-        </div>
-      )}
-    </div>
-  );
-};
-
 function Questions({
   difficulty = "easy",
   points,
@@ -162,6 +120,9 @@ function Questions({
   const [isCorrect, setIsCorrect] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(MODAL_TYPES.checkAnswer);
+  const [isClaiming, setIsClaiming] = useState(false);
+  const [isNftClaimed, setIsNftClaimed] = useState(false);
+  const [nftClaimButtonText, setNftClaimButtonText] = useState("Claim NFT");
 
   const isLevelFinished = useCallback(() => {
     return itemCounter + 1 > LEVEL_LIMIT[difficulty];
@@ -197,6 +158,18 @@ function Questions({
     setSelectedAnswer(answer);
   };
 
+  const handleNftClaim =
+    (difficulty = "easy") =>
+    () => {
+      setIsClaiming(true);
+      setNftClaimButtonText("Claiming...");
+      mintToken(difficulty, accounts[0]).then((tx) => {
+        setIsNftClaimed(true);
+        setIsClaiming(false);
+        setNftClaimButtonText("NFT Claimed");
+      });
+    };
+
   const handleNextQuestion = () => {
     handleClose();
     setIsCorrect(false);
@@ -219,6 +192,9 @@ function Questions({
     setSelectedAnswer(null);
     setItemCounter(0);
     setDifficulty(difficultySetting);
+    setIsNftClaimed(false);
+    setIsClaiming(false);
+    setNftClaimButtonText("Claim NFT");
   };
 
   const handleCheckAnswer = () => {
@@ -286,7 +262,7 @@ function Questions({
       buttonVariant = "primary";
       buttonText = "Start next level";
       clickAction = startNextLevel;
-      claimNFTScreen = renderNftClaim(difficulty, isWalletConnected);
+      claimNFTScreen = renderNftClaim();
       titleColor = "level-up";
     } else if (modalType === MODAL_TYPES.gameCompleted) {
       title = "You've made it!";
@@ -294,7 +270,7 @@ function Questions({
         "Congratulations! You've completed the Quiz. Please claim your NFT and tokens.";
       buttonVariant = "success";
       buttonText = "Back to Home";
-      claimNFTScreen = renderNftClaim(difficulty, isWalletConnected, points);
+      claimNFTScreen = renderNftClaim();
       clickAction = restartGame;
       titleColor = "level-up";
     } else if (modalType === MODAL_TYPES.gameOver) {
@@ -332,6 +308,63 @@ function Questions({
           </Button>
         </Modal.Footer>
       </Modal>
+    );
+  };
+
+  const renderNftClaim = () => {
+    let badge = "";
+    let alt = "";
+    if (difficulty === DIFFICULTY_LEVEL.easy.difficulty) {
+      badge = Images.bibleRookie;
+      alt = "Bible Rookie";
+    } else if (difficulty === DIFFICULTY_LEVEL.medium.difficulty) {
+      badge = Images.bibleAdept;
+      alt = "Bible Adept";
+    } else if (difficulty === DIFFICULTY_LEVEL.difficult.difficulty) {
+      badge = Images.bibleGuru;
+      alt = "Bible Guru";
+    }
+
+    return (
+      <div className="badge-container">
+        <img src={badge} className="nft-badge" alt={alt} />
+        {isWalletConnected && (
+          <div className="claim-button-container">
+            <Button
+              variant={"warning"}
+              disabled={!isWalletConnected || isClaiming || isNftClaimed}
+              onClick={handleNftClaim(difficulty)}
+            >
+              {isClaiming && (
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              )}
+              {nftClaimButtonText}
+            </Button>
+          </div>
+        )}
+
+        {difficulty === DIFFICULTY_LEVEL.difficult.difficulty &&
+          points !== 0 &&
+          isWalletConnected && (
+            <div className="token-claim-container">
+              <Button variant="info" disabled={!isWalletConnected}>
+                {`Claim ${points} Tokens`}
+              </Button>
+            </div>
+          )}
+        {isWalletConnected && (
+          <div className="wallet-warning">
+            Please make sure your MetaMask wallet is connected in order to claim
+            this NFT.
+          </div>
+        )}
+      </div>
     );
   };
 
