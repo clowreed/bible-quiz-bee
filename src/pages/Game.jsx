@@ -13,10 +13,13 @@ const STEP_2_TEXT = `You will start with 5 hearts, and if you consume all your h
 
 const STEP_3_TEXT = `Once you are ready, click the Start button to begin. Good luck!`;
 
+let tokens = 0;
+
 function Game({ username, restartGame, isWalletConnected, accounts }) {
   const [step, setNextStep] = useState(1);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [points, setPoints] = useState(0);
+  const [tokenCount, setTokenCount] = useState(0);
   const [heartCounter, setHeartCounter] = useState(5);
   const [difficulty, setDifficulty] = useState(
     DIFFICULTY_LEVEL.easy.difficulty
@@ -34,6 +37,17 @@ function Game({ username, restartGame, isWalletConnected, accounts }) {
       setInstructionText(STEP_3_TEXT);
     }
   }, [username, step, instructionText]);
+
+  useEffect(() => {
+    if (points < 50) {
+      tokens = 100;
+    } else if (points > 50 && points < 100) {
+      tokens = 500;
+    } else if (points >= 100) {
+      tokens = 1000;
+    }
+    setTokenCount(tokens);
+  }, [points]);
 
   const handleClickNextStep = () => {
     setNextStep(step + 1);
@@ -76,6 +90,8 @@ function Game({ username, restartGame, isWalletConnected, accounts }) {
   const handleGameOver = () => {
     setHeartCounter(5);
     setPoints(0);
+    setTokenCount(0);
+    setDifficulty(DIFFICULTY_LEVEL.easy.difficulty);
     restartGame();
   };
 
@@ -92,6 +108,7 @@ function Game({ username, restartGame, isWalletConnected, accounts }) {
         isWalletConnected={isWalletConnected}
         handleGameOver={handleGameOver}
         accounts={accounts}
+        tokenCount={tokenCount}
       />
     );
   };

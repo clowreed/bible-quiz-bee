@@ -12,7 +12,7 @@ import CustomIcons from "./CustomIcons";
 import { QUESTIONS } from "../data/quiz-data";
 import { DIFFICULTY_LEVEL } from "../models/quiz-model";
 import Images from "../assets/images";
-import { mintToken } from "../web3";
+import { mintToken, claimToken } from "../web3";
 
 const LEVEL_LIMIT = {
   easy: 20,
@@ -113,6 +113,7 @@ function Questions({
   isWalletConnected,
   handleGameOver,
   accounts,
+  tokenCount,
 }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizData, setQuizData] = useState([]);
@@ -123,6 +124,11 @@ function Questions({
   const [isClaiming, setIsClaiming] = useState(false);
   const [isNftClaimed, setIsNftClaimed] = useState(false);
   const [nftClaimButtonText, setNftClaimButtonText] = useState("Claim NFT");
+  const [isTokenClaiming, setIsTokenClaiming] = useState(false);
+  const [isTokenClaimed, setIsTokenClaimed] = useState(false);
+  const [tokenClaimButtonText, setTokenClaimButtonText] = useState(
+    `Claim ${tokenCount} BIBLE Tokens`
+  );
 
   const isLevelFinished = useCallback(() => {
     return itemCounter + 1 > LEVEL_LIMIT[difficulty];
@@ -154,6 +160,10 @@ function Questions({
     }
   }, [heartCounter]);
 
+  useEffect(() => {
+    setTokenClaimButtonText(`Claim ${tokenCount} BIBLE Tokens`);
+  }, [tokenCount]);
+
   const selectAnswer = (answer) => {
     setSelectedAnswer(answer);
   };
@@ -163,12 +173,36 @@ function Questions({
     () => {
       setIsClaiming(true);
       setNftClaimButtonText("Claiming...");
-      mintToken(difficulty, accounts[0]).then((tx) => {
-        setIsNftClaimed(true);
-        setIsClaiming(false);
-        setNftClaimButtonText("NFT Claimed");
-      });
+      mintToken(difficulty, accounts[0])
+        .then((tx) => {
+          setIsNftClaimed(true);
+          setIsClaiming(false);
+          setNftClaimButtonText("NFT Claimed");
+        })
+        .catch((error) => {
+          console.error("Claim NFT error", error);
+          setIsNftClaimed(false);
+          setIsClaiming(false);
+          setNftClaimButtonText(`Claim NFT`);
+        });
     };
+
+  const handleClaimToken = () => {
+    setIsTokenClaiming(true);
+    setTokenClaimButtonText("Claiming...");
+    claimToken(tokenCount, accounts[0])
+      .then((tx) => {
+        setIsTokenClaimed(true);
+        setIsTokenClaiming(false);
+        setTokenClaimButtonText(`${tokenCount} BIBLE Claimed`);
+      })
+      .catch((error) => {
+        console.error("Claim token error", error);
+        setIsTokenClaimed(false);
+        setIsTokenClaiming(false);
+        setTokenClaimButtonText(`Claim ${tokenCount} BIBLE Tokens`);
+      });
+  };
 
   const handleNextQuestion = () => {
     handleClose();
@@ -335,16 +369,22 @@ function Questions({
               disabled={!isWalletConnected || isClaiming || isNftClaimed}
               onClick={handleNftClaim(difficulty)}
             >
-              {isClaiming && (
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-              )}
-              {nftClaimButtonText}
+              <div className="claim-container">
+                {isClaiming && (
+                  <div className="claim-spinner">
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                  </div>
+                )}
+                <div className="claim-button-text-container">
+                  {nftClaimButtonText}
+                </div>
+              </div>
             </Button>
           </div>
         )}
@@ -353,8 +393,29 @@ function Questions({
           points !== 0 &&
           isWalletConnected && (
             <div className="token-claim-container">
-              <Button variant="info" disabled={!isWalletConnected}>
-                {`Claim ${points} Tokens`}
+              <Button
+                variant="info"
+                disabled={
+                  !isWalletConnected || isTokenClaiming || isTokenClaimed
+                }
+                onClick={handleClaimToken}
+              >
+                <div className="claim-container">
+                  {isTokenClaiming && (
+                    <div className="claim-spinner">
+                      <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  )}
+                  <div className="claim-button-text-container">
+                    {tokenClaimButtonText}
+                  </div>
+                </div>
               </Button>
             </div>
           )}
