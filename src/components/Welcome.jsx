@@ -1,8 +1,12 @@
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import HowToConnect from "./HowToConnect";
+import HowToPlay from "./HowToPlay";
+import LearnAndEarn from "./LearnAndEarn";
 import "../css/common.css";
 import "../css/game.css";
 
@@ -19,6 +23,16 @@ function Welcome({
   disconnectWallet,
   isWalletConnected,
 }) {
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [helpModalType, setHelpModalType] = useState("");
+
+  const toggleHelpModal =
+    (type = "how-to-connect") =>
+    () => {
+      setHelpModalType(type);
+      setShowHelpModal(!showHelpModal);
+    };
+
   const renderModal = () => {
     return (
       <Modal
@@ -46,6 +60,42 @@ function Welcome({
           </Button>
           <Button variant="primary" onClick={handleSaveGuest}>
             Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
+
+  const renderHelpModal = () => {
+    let modalTitle = "";
+    let helpScreen = null;
+    if (helpModalType === "how-to-connect") {
+      modalTitle = "How to Connect to MetaMetamask";
+      helpScreen = <HowToConnect />;
+    } else if (helpModalType === "how-to-play") {
+      modalTitle = "How to Play";
+      helpScreen = <HowToPlay />;
+    } else if (helpModalType === "learn-and-earn") {
+      modalTitle = "Learn and Earn";
+      helpScreen = <LearnAndEarn />;
+    }
+
+    return (
+      <Modal
+        show={showHelpModal}
+        onHide={toggleHelpModal("")}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        dialogClassName="modal-90w"
+        animation={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{modalTitle}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{helpScreen}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={toggleHelpModal("")}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
@@ -92,7 +142,7 @@ function Welcome({
                 xs={12}
               >
                 <Button
-                  variant="secondary justify-content-center align-content-center"
+                  variant="info justify-content-center align-content-center"
                   onClick={handleGuestLogin}
                   size="lg"
                 >
@@ -124,8 +174,37 @@ function Welcome({
 
   return (
     <Container id="game" fluid className="full-height">
-      <div className="welcome">{renderTitleScreen()}</div>
+      <div className="welcome-screen-container">
+        <div className="welcome">{renderTitleScreen()}</div>
+        <div className="info-container">
+          <div className="info-buttons-container">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={toggleHelpModal("how-to-connect")}
+            >
+              How to Connect Wallet
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={toggleHelpModal("how-to-play")}
+            >
+              How to Play
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={toggleHelpModal("learn-and-earn")}
+            >
+              Learn and Earn
+            </Button>
+          </div>
+        </div>
+        <div className="copyright-container">© 2022 Clowreed</div>
+      </div>
       {renderModal()}
+      {renderHelpModal()}
     </Container>
   );
 }

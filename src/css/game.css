@@ -139,9 +139,55 @@
     align-items: center;
     justify-content: center;
   }
+
+  #game .welcome-screen-container {
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+  }
+
+  #game .welcome {
+    flex: 18;
+  }
+
+  #game .info-buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  #game .info-container {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #game .copyright-container {
+    text-align: center;
+    font-size: x-small;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #game .info-buttons-container .btn {
+    font-size: xx-small;
+  }
+
+  .help-info {
+    font-family: "Quicksand-SemiBold";
+    text-align: justify;
+  }
 }
 
 @media only screen and (min-width: 480px) {
+  #game .info-buttons-container .btn {
+    font-size: small;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -176,6 +222,10 @@
   #game .available-points {
     font-size: large;
   }
+
+  #game .info-buttons-container .btn {
+    font-size: medium;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -188,11 +238,19 @@
     display: flex;
     flex-direction: row;
   }
+
+  #game .welcome {
+    flex: 14;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
   .badge-container .nft-badge {
     width: 430px;
     height: 430px;
+  }
+
+  #game .info-buttons-container .btn {
+    font-size: large;
   }
 }
