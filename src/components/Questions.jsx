@@ -226,6 +226,8 @@ function Questions({
     setSelectedAnswer(null);
     setItemCounter(0);
     setDifficulty(difficultySetting);
+    setIsTokenClaimed(false);
+    setIsTokenClaimed(false);
     setIsNftClaimed(false);
     setIsClaiming(false);
     setNftClaimButtonText("Claim NFT");
@@ -348,15 +350,19 @@ function Questions({
   const renderNftClaim = () => {
     let badge = "";
     let alt = "";
+    let canClaimToken = false;
     if (difficulty === DIFFICULTY_LEVEL.easy.difficulty) {
       badge = Images.bibleRookie;
+      canClaimToken = points > 0;
       alt = "Bible Rookie";
     } else if (difficulty === DIFFICULTY_LEVEL.medium.difficulty) {
       badge = Images.bibleAdept;
+      canClaimToken = points >= 50;
       alt = "Bible Adept";
     } else if (difficulty === DIFFICULTY_LEVEL.difficult.difficulty) {
       badge = Images.bibleGuru;
       alt = "Bible Guru";
+      canClaimToken = points >= 95;
     }
 
     return (
@@ -389,40 +395,36 @@ function Questions({
           </div>
         )}
 
-        {difficulty === DIFFICULTY_LEVEL.difficult.difficulty &&
-          points !== 0 &&
-          isWalletConnected && (
-            <div className="token-claim-container">
-              <Button
-                variant="info"
-                disabled={
-                  !isWalletConnected || isTokenClaiming || isTokenClaimed
-                }
-                onClick={handleClaimToken}
-              >
-                <div className="claim-container">
-                  {isTokenClaiming && (
-                    <div className="claim-spinner">
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  )}
-                  <div className="claim-button-text-container">
-                    {tokenClaimButtonText}
+        {isWalletConnected && canClaimToken && (
+          <div className="token-claim-container">
+            <Button
+              variant="info"
+              disabled={!isWalletConnected || isTokenClaiming || isTokenClaimed}
+              onClick={handleClaimToken}
+            >
+              <div className="claim-container">
+                {isTokenClaiming && (
+                  <div className="claim-spinner">
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
                   </div>
+                )}
+                <div className="claim-button-text-container">
+                  {tokenClaimButtonText}
                 </div>
-              </Button>
-            </div>
-          )}
+              </div>
+            </Button>
+          </div>
+        )}
         {isWalletConnected && (
           <div className="wallet-warning">
-            Please make sure your MetaMask wallet is connected in order to claim
-            this NFT.
+            Please make sure your MetaMask wallet is connected in order claim
+            tokens and this NFT. (Also have some ETH for tx fees)
           </div>
         )}
       </div>

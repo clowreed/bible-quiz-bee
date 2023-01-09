@@ -41,9 +41,9 @@ function Game({ username, restartGame, isWalletConnected, accounts }) {
   useEffect(() => {
     if (points < 50) {
       tokens = 100;
-    } else if (points > 50 && points < 100) {
+    } else if (points > 50 && points < 95) {
       tokens = 500;
-    } else if (points >= 100) {
+    } else if (points >= 95) {
       tokens = 1000;
     }
     setTokenCount(tokens);
