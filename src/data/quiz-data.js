@@ -958,7 +958,7 @@ export const QUESTIONS = [
   new QuizModel({
     id: 107,
     question: "Who was the disciple that betrayed Jesus with a kiss?",
-    answer: "Peter",
+    answer: "Judas",
     options: ["Thomas", "Judas", "James", "Peter"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.easy.difficulty,
