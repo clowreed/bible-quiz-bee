@@ -374,7 +374,7 @@ export const QUESTIONS = [
     id: 42,
     question: "Who was the mother of Joab, David's commander?",
     answer: "Zeruiah",
-    options: ["Abigal", "Zeruiah", "Elizabeth", "Jochebed"],
+    options: ["Abigail", "Zeruiah", "Elizabeth", "Jochebed"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
     points: DIFFICULTY_LEVEL.difficult.points
@@ -837,5 +837,158 @@ export const QUESTIONS = [
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.difficult.difficulty,
     points: DIFFICULTY_LEVEL.difficult.points
+  }),
+  new QuizModel({
+    id: 94,
+    question: "Who was the strongest man in the Bible?",
+    answer: "Samson",
+    options: ["Jephtah", "Gideon", "Samson", "Barak"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 95,
+    question: "Who was the woman that betrayed Samson to the Philistines?",
+    answer: "Delilah",
+    options: ["Abigail", "Delilah", "Dinah", "Miriam"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 96,
+    question: "Who was David's bestfriend",
+    answer: "Jonathan",
+    options: ["Shammah", "Saul", "Jonathan", "Eliab"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 97,
+    question: "Who was Moses' successor?",
+    answer: "Joshua",
+    options: ["Joshua", "Aaron", "Eliezer", "Samuel"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 98,
+    question: "How many people were saved in the ark including Noah?",
+    answer: "8",
+    options: ["3", "8", "12", "30"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 99,
+    question: "Who was the brother of Moses?",
+    answer: "Aaron",
+    options: ["Joshua", "Ishmael", "Aaron", "Jacob"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 100,
+    question: "Who was the sister of Moses?",
+    answer: "Miriam",
+    options: ["Zipporah", "Miriam", "Jochebed", "Naomi"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 101,
+    question: "Who was the mother of Moses?",
+    answer: "Jochebed",
+    options: ["Zipporah", "Miriam", "Jochebed", "Naomi"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 102,
+    question: "Who was the left-handed judge of Israel?",
+    answer: "Ehud",
+    options: ["Ehud", "Barak", "Gideon", "Jephtah"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 103,
+    question: "Noah's ark was made of what kind of wood?",
+    answer: "Gopher",
+    options: ["Narra", "Oak", "Gopher", "Cedar"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 104,
+    question: "Which one is not a river found in the Garden of Eden?",
+    answer: "Gopher",
+    options: ["Tigris", "Euphrates", "Pishon", "Nile"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 105,
+    question: "Who was the Israelite judge that led an attack on thousands of Midianite armies with only 300 men?",
+    answer: "Gideon",
+    options: ["David", "Samuel", "Joshua", "Gideon"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.medium.difficulty,
+    points: DIFFICULTY_LEVEL.medium.points
+  }),
+  new QuizModel({
+    id: 106,
+    question: "Who was the disciple that denied Jesus?",
+    answer: "Peter",
+    options: ["Thomas", "John", "James", "Peter"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 107,
+    question: "Who was the disciple that betrayed Jesus with a kiss?",
+    answer: "Peter",
+    options: ["Thomas", "Judas", "James", "Peter"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 108,
+    question: "Who was litle man that climbed a sycamore tree just to see Jesus?",
+    answer: "Zaccheus",
+    options: ["Zaccheus", "Barnabas", "Simon", "Lazarus"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 109,
+    question: "John the Baptist was Jesus' _ _ _ _?",
+    answer: "Cousin",
+    options: ["Brother", "Cousin", "Uncle", "No relation"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
+  }),
+  new QuizModel({
+    id: 110,
+    question: "Who was the disciple that doubted Jesus resurrection?",
+    answer: "Thomas",
+    options: ["Peter", "Thomas", "Matthew", "Philip"],
+    category: CATEGORIES.general,
+    difficulty: DIFFICULTY_LEVEL.easy.difficulty,
+    points: DIFFICULTY_LEVEL.easy.points
   })
 ];
