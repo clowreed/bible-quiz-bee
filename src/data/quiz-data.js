@@ -931,7 +931,7 @@ export const QUESTIONS = [
   new QuizModel({
     id: 104,
     question: "Which one is not a river found in the Garden of Eden?",
-    answer: "Gopher",
+    answer: "Nile",
     options: ["Tigris", "Euphrates", "Pishon", "Nile"],
     category: CATEGORIES.general,
     difficulty: DIFFICULTY_LEVEL.medium.difficulty,
